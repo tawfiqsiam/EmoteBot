@@ -8,6 +8,8 @@
 [![](http://forthebadge.com/images/badges/built-with-love.svg)]()
 [![](http://forthebadge.com/images/badges/uses-badges.svg)]()
 [![](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)]()
+[![](https://img.shields.io/badge/dev%20for-EmoteCord-brightgreen.svg?style=for-the-badge)]()
+
 
 # Invite the bot : https://discordapp.com/oauth2/authorize?client_id=397007011549675521&scope=bot&permissions=-1
 
