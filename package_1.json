@@ -1,0 +1,19 @@
+{
+    "name": "types-registry",
+    "version": "0.1.330",
+    "description": "A registry of TypeScript declaration file packages published within the @types scope.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Microsoft/types-publisher.git"
+    },
+    "keywords": [
+        "TypeScript",
+        "declaration",
+        "files",
+        "types",
+        "packages"
+    ],
+    "author": "Microsoft Corp.",
+    "license": "MIT",
+    "typesPublisherContentHash": "4cbce79114c6aebcf3ca8e21da403c026176fdd759bc13d46cc0a4ae449ca51f"
+}
