@@ -14,13 +14,8 @@
 # Invite the bot : https://discordapp.com/oauth2/authorize?client_id=397007011549675521&scope=bot&permissions=-1
 
 # Run it by yourself :
-## 1.Requirement :
-### Discord.js, discord-money (shame on me i use this package), moment,sqlite, webhook-discord (will be used only for bot owner(s)), crypto-js, http (idk why :D),
 
-## 2. Create an app on Discord apps
-### blabla...
-
-## 3. Create a webhook
+## look at the wiki : https://github.com/Yaume230/EmoteCord-Bot/wiki
 
 ## Contact me on Dm "Jus De Patate#0190" if you need me or join my server : https://discord.gg/8aqUgNk
 
