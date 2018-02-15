@@ -48,30 +48,30 @@ bot.on('message', message => {
 		message.channel.send(`:ping_pong: \`${Date.now() - message.createdTimestamp} ms\``);
 	}
 	if(message.content.startsWith(prefix + 'userinfo')) {
-		let member = message.mentions.members.first();
+		let member = message.mentions.members.first()
 
 		if(!member) {
-		const embed = new Discord.RichEmbed()
-		embed.setTitle(message.author.username)
-		embed.setAuthor("EmoteCord Bot")
-		embed.setColor(0x00AE86)
-		embed.setFooter("EmoteCord Bot")
-		embed.setImage(message.author.displayAvatarURL)
-		embed.setTimestamp()
-		embed.addField("Account creation", message.author.createdAt)
-		embed.addField("Name", message.author.username + "#" + message.author.discriminator)
-		message.channel.send({embed});
-		}
-		if(member) {
 			const embed = new Discord.RichEmbed()
 			embed.setTitle(message.author.username)
 			embed.setAuthor("EmoteCord Bot")
 			embed.setColor(0x00AE86)
 			embed.setFooter("EmoteCord Bot")
-			embed.setImage(member.avatarURL)
+			embed.setImage(message.author.displayAvatarURL)
 			embed.setTimestamp()
-			embed.addField("Account creation", member.createdAt)
-			embed.addField("Name", member.username + "#" + member.discriminator)
+			embed.addField("Account creation", message.author.createdAt)
+			embed.addField("Name", message.author.username + "#" + message.author.discriminator)
+			message.channel.send({embed});
+		}
+		if(member) {
+			const embed = new Discord.RichEmbed()
+			embed.setTitle(member.displayName)
+			embed.setAuthor("EmoteCord Bot")
+			embed.setColor(0x00AE86)
+			embed.setFooter("EmoteCord Bot")
+			embed.setImage(member.user.displayAvatarURL)
+			embed.setTimestamp()
+			embed.addField("Account creation", member.user.createdAt)
+			embed.addField("Name", member.user.tag)
 			message.channel.send({embed});
 		}
 	}
@@ -288,18 +288,18 @@ if (message.content.startsWith(prefix + '8ball')) {
 		if(member) {
 			sql.get(`SELECT * FROM scores WHERE userId ="${member.id}"`).then(row => {
 				money.fetchBal(member.id).then((i) => { // money.fetchBal grabs the userID, finds it, and puts it into 'i'.
-			const embed = new Discord.RichEmbed()
-			embed.setTitle(member.displayName)
-			embed.setAuthor("EmoteCord Bot")
-			embed.setColor(0x00AE86)
-			embed.setFooter("EmoteCord Bot")
-			embed.setImage(member.displayAvatarURL)
-			embed.setTimestamp()
-			embed.addField("LVL", row.level)
-			embed.addField("XP", row.points)
-			embed.addField("๖̶̶̶ζ͜͡Cr", i.money)
-			message.channel.send({embed});
-		})
+				const embed = new Discord.RichEmbed()
+				embed.setTitle(member.displayName)
+				embed.setAuthor("EmoteCord Bot")
+				embed.setColor(0x00AE86)
+				embed.setFooter("EmoteCord Bot")
+				embed.setImage(member.user.displayAvatarURL)
+				embed.setTimestamp()
+				embed.addField("LVL", row.level)
+				embed.addField("XP", row.points)
+				embed.addField("๖̶̶̶ζ͜͡Cr", i.money)
+				message.channel.send({embed});
+			})
 	});
 		}
 		  
