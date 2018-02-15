@@ -47,6 +47,34 @@ bot.on('message', message => {
 		message.react('🏓')
 		message.channel.send(`:ping_pong: \`${Date.now() - message.createdTimestamp} ms\``);
 	}
+	if(message.content.startsWith(prefix + 'userinfo')) {
+		let member = message.mentions.members.first();
+
+		if(!member) {
+		const embed = new Discord.RichEmbed()
+		embed.setTitle(message.author.username)
+		embed.setAuthor("EmoteCord Bot")
+		embed.setColor(0x00AE86)
+		embed.setFooter("EmoteCord Bot")
+		embed.setImage(message.author.displayAvatarURL)
+		embed.setTimestamp()
+		embed.addField("Account creation", message.author.createdAt)
+		embed.addField("Name", message.author.username + "#" + message.author.discriminator)
+		message.channel.send({embed});
+		}
+		if(member) {
+			const embed = new Discord.RichEmbed()
+			embed.setTitle(message.author.username)
+			embed.setAuthor("EmoteCord Bot")
+			embed.setColor(0x00AE86)
+			embed.setFooter("EmoteCord Bot")
+			embed.setImage(member.avatarURL)
+			embed.setTimestamp()
+			embed.addField("Account creation", member.createdAt)
+			embed.addField("Name", member.username + "#" + member.discriminator)
+			message.channel.send({embed});
+		}
+	}
 	if (message.content.startsWith(adminprefix + 'setgame')) {
 		if (message.author.id != OWNERID && message.author.id != OWNERID2 && message.author.id != OWNERID3) {
 			message.reply("You arent bot owner :/")
@@ -117,12 +145,12 @@ if (message.content.startsWith(prefix + '8ball')) {
 					embed.setAuthor('EmoteCord Bot')
 					embed.setColor(0x00AE86)
 					embed.setDescription('by Xen#0190')
-					embed.setFooter('EmoteCord Bot v2.3', 'https://image.freepik.com/icones-gratuites/point-d-39-interrogation-dans-un-cercle_318-27276.jpg')
+					embed.setFooter('EmoteCord Bot v2.3.2', 'https://image.freepik.com/icones-gratuites/point-d-39-interrogation-dans-un-cercle_318-27276.jpg')
 					embed.setImage('https://media.istockphoto.com/vectors/question-mark-drawing-vector-id537535590')
 					embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
 					embed.setTimestamp()
 					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command')
-					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<EmoteCord, give an invite for EmoteCord\n<support, get an invite to the support server', true)
+					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<EmoteCord, give an invite for EmoteCord\n<support, get an invite to the support server\n<userinfo @user, give info about this user', true)
 					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
 					embed.addField('Crypto <:lock:405711204971970571>', "<btc, give BTC price\n<eth, give ETH price\n<xmr, give XMR price\n<ltc, give LTC price\n<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
 					embed.addField('Level/Money <:speech_left:405712671804227584>', '<profile, give your profile\n<daily, give your daily 500๖̶̶̶ζ͜͡Cr \nMoney exchange are impossible', true);
