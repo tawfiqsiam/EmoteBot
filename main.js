@@ -64,6 +64,43 @@ bot.on('message', message => {
 			message.reply("Game changed !");
 		}
 }
+if (message.content.startsWith(adminprefix + 'membercount')) {
+	if(message.author.id != OWNERID) return;
+	const embed = new Discord.RichEmbed()
+		embed.setTitle('Membercount')
+		embed.setAuthor('EmoteCord Bot')
+		embed.setColor(0x00AE86)
+		embed.setDescription('by Xen#0190')
+		embed.setThumbnail('https://cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
+		embed.setTimestamp()
+		embed.addField('Membercount', `${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} (${message.guild.members.filter(m=>m.user.bot).size} bots)`, true)
+		const msg = message.channel.send({embed})
+
+	bot.on("guildMemberAdd", (member) => {
+		message.delete()
+		const embed = new Discord.RichEmbed()
+			embed.setTitle('Membercount')
+			embed.setAuthor('EmoteCord Bot')
+			embed.setColor(0x00AE86)
+			embed.setDescription('by Xen#0190')
+			embed.setThumbnail('https://cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
+			embed.setTimestamp()
+			embed.addField('Membercount', `${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} (${message.guild.members.filter(m=>m.user.bot).size} bots)`, true)
+		const msg = message.channel.send({embed})
+	});
+	bot.on('guildMemberRemove', member => {
+		message.delete()
+		const embed = new Discord.RichEmbed()
+			embed.setTitle('Membercount')
+			embed.setAuthor('EmoteCord Bot')
+			embed.setColor(0x00AE86)
+			embed.setDescription('by Xen#0190')
+			embed.setThumbnail('https://cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
+			embed.setTimestamp()
+			embed.addField('Membercount', `${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} (${message.guild.members.filter(m=>m.user.bot).size} bots)`, true)
+		const msg = message.channel.send({embed})
+	});
+  }
 	if (message.content.startsWith(prefix + 'messtodev')) {
 			message.reply("Message sent !!");
 			const sayMessage = args.join(" ");
