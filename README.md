@@ -13,7 +13,7 @@
 
 # Invite the bot : https://discordapp.com/oauth2/authorize?client_id=397007011549675521&scope=bot&permissions=-1
 
-[![DBL Widget](https://discordbots.org/api/widget/397007011549675521.svg)]()
+[![DBL Widget](https://discordbots.org/api/widget/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 
 # Run it by yourself :
 
