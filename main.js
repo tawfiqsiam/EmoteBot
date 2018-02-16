@@ -23,7 +23,7 @@ bot.on('ready', () => {
 		hook.info("Xenohook", bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
 		console.log(bot.user.username + " en ligne !");
 		console.log(bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
-		bot.user.setGame("<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !");
+		bot.user.setActivity("(<help) " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 		bot.user.setUsername("Insert Username of the bot");
 });
 
