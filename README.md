@@ -1,14 +1,14 @@
 # EmoteCord Bot
 
 [![https://github.com/Yaume230/EmoteCord-Bot/blob/master/LICENSE](https://img.shields.io/hexpm/l/plug.svg?style=for-the-badge)]()
-[![](http://forthebadge.com/images/badges/uses-js.svg)]()
-[![https://www.npmjs.com/](https://img.shields.io/badge/%20use%20NodeJS-v9.4-brightgreen.svg?style=for-the-badge)]()
-[![https://discord.js.org/#/](https://img.shields.io/badge/%20use%20DiscordJS-v11.0-brightgreen.svg?style=for-the-badge)]()
-[![https://www.npmjs.com/](https://img.shields.io/badge/dev%20by-Xen-brightgreen.svg?style=for-the-badge)]()
-[![](http://forthebadge.com/images/badges/built-with-love.svg)]()
-[![](http://forthebadge.com/images/badges/uses-badges.svg)]()
-[![](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)]()
-[![](https://img.shields.io/badge/dev%20for-EmoteCord-brightgreen.svg?style=for-the-badge)]()
+[![](https://img.shields.io/badges/uses-js.svg)]()
+[![](https://img.shields.io/badge/use%20NodeJS-v9.4-brightgreen.svg)]()
+[![](https://img.shields.io/badge/use%20DiscordJS-v11.0-brightgreen.svg)]()
+[![](https://img.shields.io/badge/dev%20by-Xen-brightgreen.svg)]()
+[![](https://img.shields.io/badges/built%20with-love-brightgreen.svg)]()
+[![](https://img.shields.io/badges/uses-badges-brightgreen.svg)]()
+[![](https://img.shields.io/badge/60%20percent%20of%20the%20time-works%20every%20time-brightgreen.svg)]()
+[![](https://img.shields.io/badge/dev%20for-EmoteCord-brightgreen.svg)]()
 
 [![Discord Bots](https://discordbots.org/api/widget/status/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 [![Discord Bots](https://discordbots.org/api/widget/servers/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
