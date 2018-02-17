@@ -5,7 +5,7 @@
 [![](https://img.shields.io/badge/use%20NodeJS-v9.4-brightgreen.svg)]()
 [![](https://img.shields.io/badge/use%20DiscordJS-v11.0-brightgreen.svg)]()
 [![](https://img.shields.io/badge/dev%20by-Xen-brightgreen.svg)]()
-[![](https://img.shields.io/badges/built%20with-love-brightgreen.svg)]()
+[![](https://img.shields.io/badge/built%20with-love-brightgreen.svg)]()
 [![](https://img.shields.io/badge/uses-badges-brightgreen.svg)]()
 [![](https://img.shields.io/badge/60%20percent%20of%20the%20time-works%20every%20time-brightgreen.svg)]()
 [![](https://img.shields.io/badge/dev%20for-EmoteCord-brightgreen.svg)]()
