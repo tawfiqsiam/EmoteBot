@@ -1,13 +1,11 @@
 const Discord = require('discord.js');
 const money = require('discord-money');
 const moment = require('moment');
-const sql = require('sqlite');
 var Webhook = require("webhook-discord")
 var MD5 = require("crypto-js/md5");
 var SHA256 = require("crypto-js/sha256");
 let price = require('crypto-price')
 const bot = new Discord.Client();
-var http = require('http');
 var prefix = "<"
 var adminprefix = "<!"
 var OWNERID = "your id"
@@ -15,7 +13,6 @@ var OWNERID2 = "2nd owner id"
 var OWNERID3 = "3e owner id"
 const config = require("./config.json");
 bot.login(config.token);
-var score = sql.open("./score.sqlite");
 var hook = new Webhook("your webhook url without token" + config.hooktoken)
 
 bot.on('ready', () => {
@@ -24,18 +21,18 @@ bot.on('ready', () => {
 		console.log(bot.user.username + " en ligne !");
 		console.log(bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
 		bot.user.setActivity("(<help) " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
-		bot.user.setUsername("Insert Username of the bot");
+		bot.user.setUsername("Check your code at line 24 !");
 });
 
 bot.on('guildCreate', guild => {
 	hook.info("Xenohook", 'New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
 	console.log('New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
-	bot.user.setGame("<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !");
+	bbot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 });
 bot.on("guildDelete", guild => {
 	console.log('I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
 	hook.info("Xenohook", 'I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
-	bot.user.setGame("<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !");
+	bot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 });
 
 bot.on('message', message => {
@@ -49,13 +46,12 @@ bot.on('message', message => {
 	}
 	if(message.content.startsWith(prefix + 'userinfo')) {
 		let member = message.mentions.members.first()
-
 		if(!member) {
 			const embed = new Discord.RichEmbed()
 			embed.setTitle(message.author.username)
 			embed.setAuthor("EmoteCord Bot")
 			embed.setColor(0x00AE86)
-			embed.setFooter("EmoteCord Bot")
+			embed.setFooter(bot.user.username, bot.user.avatarURL);
 			embed.setImage(message.author.displayAvatarURL)
 			embed.setTimestamp()
 			embed.addField("Account creation", message.author.createdAt)
@@ -67,7 +63,7 @@ bot.on('message', message => {
 			embed.setTitle(member.displayName)
 			embed.setAuthor("EmoteCord Bot")
 			embed.setColor(0x00AE86)
-			embed.setFooter("EmoteCord Bot")
+			embed.setFooter(bot.user.username, bot.user.avatarURL);
 			embed.setImage(member.user.displayAvatarURL)
 			embed.setTimestamp()
 			embed.addField("Account creation", member.user.createdAt)
@@ -97,37 +93,13 @@ if (message.content.startsWith(adminprefix + 'membercount')) {
 	const embed = new Discord.RichEmbed()
 		embed.setTitle('Membercount')
 		embed.setAuthor('EmoteCord Bot')
+		embed.setFooter(bot.user.username, bot.user.avatarURL);
 		embed.setColor(0x00AE86)
 		embed.setDescription('by Xen#0190')
 		embed.setThumbnail('https://cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
 		embed.setTimestamp()
 		embed.addField('Membercount', `${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} (${message.guild.members.filter(m=>m.user.bot).size} bots)`, true)
-		const msg = message.channel.send({embed})
-
-	bot.on("guildMemberAdd", (member) => {
-		message.delete()
-		const embed = new Discord.RichEmbed()
-			embed.setTitle('Membercount')
-			embed.setAuthor('EmoteCord Bot')
-			embed.setColor(0x00AE86)
-			embed.setDescription('by Xen#0190')
-			embed.setThumbnail('https://cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
-			embed.setTimestamp()
-			embed.addField('Membercount', `${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} (${message.guild.members.filter(m=>m.user.bot).size} bots)`, true)
-		const msg = message.channel.send({embed})
-	});
-	bot.on('guildMemberRemove', member => {
-		message.delete()
-		const embed = new Discord.RichEmbed()
-			embed.setTitle('Membercount')
-			embed.setAuthor('EmoteCord Bot')
-			embed.setColor(0x00AE86)
-			embed.setDescription('by Xen#0190')
-			embed.setThumbnail('https://cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
-			embed.setTimestamp()
-			embed.addField('Membercount', `${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} (${message.guild.members.filter(m=>m.user.bot).size} bots)`, true)
-		const msg = message.channel.send({embed})
-	});
+		message.channel.send({embed})
   }
 	if (message.content.startsWith(prefix + 'messtodev')) {
 			message.reply("Message sent !!");
@@ -139,31 +111,31 @@ if (message.content.startsWith(prefix + '8ball')) {
 	var truc2 = Math.floor(Math.random()*truc.length);
 	message.reply(truc[truc2])
 }
-	if (message.content.startsWith(prefix + 'help')) {
-				const embed = new Discord.RichEmbed()
-					embed.setTitle('Help !')
-					embed.setAuthor('EmoteCord Bot')
-					embed.setColor(0x00AE86)
-					embed.setDescription('by Xen#0190')
-					embed.setFooter('EmoteCord Bot v2.3.2', 'https://image.freepik.com/icones-gratuites/point-d-39-interrogation-dans-un-cercle_318-27276.jpg')
-					embed.setImage('https://media.istockphoto.com/vectors/question-mark-drawing-vector-id537535590')
-					embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
-					embed.setTimestamp()
-					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command')
-					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<EmoteCord, give an invite for EmoteCord\n<support, get an invite to the support server\n<userinfo @user, give info about this user', true)
-					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
-					embed.addField('Crypto <:lock:405711204971970571>', "<btc, give BTC price\n<eth, give ETH price\n<xmr, give XMR price\n<ltc, give LTC price\n<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
-					embed.addField('Level/Money <:speech_left:405712671804227584>', '<profile, give your profile\n<daily, give your daily 500๖̶̶̶ζ͜͡Cr \nMoney exchange are impossible', true);
-					embed.addField('Other Language <:flag_fr:409768694822993942>', '<help 2, give international commands', true);
-					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.0/NodeJS 9.4.0', true);
-				message.reply({embed});
-	}
+if (message.content.startsWith(prefix + 'help')) {
+	const embed = new Discord.RichEmbed()
+		embed.setTitle('Help !')
+		embed.setAuthor('EmoteCord Bot')
+		embed.setColor(0x00AE86)
+		embed.setDescription('by Jus De Patate#0190')
+		embed.setFooter(bot.user.username, bot.user.avatarURL);
+		embed.setImage('https://i.imgur.com/lHU6JcZ.png')
+		embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
+		embed.setTimestamp()
+		embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command')
+		embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<EmoteCord, give an invite for EmoteCord\n<support, get an invite to the support server\n<userinfo @user, give info about this user', true)
+		embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
+		embed.addField('Crypto <:lock:405711204971970571>', "<btc, give BTC price\n<eth, give ETH price\n<xmr, give XMR price\n<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
+		embed.addField('Other Language <:flag_fr:409768694822993942>', '<help 2, give international commands', true);
+		embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.2/NodeJS 9.4.0', true);
+	message.reply({embed});
+}
 	if (message.content.startsWith(prefix + 'botinfo')) {
 		const embed = new Discord.RichEmbed()
 		embed.setTitle("Bot Info")
 		embed.addField("Users", bot.users.size)
 		embed.addField("Guilds", bot.guilds.size)
 		embed.addField("Channels", bot.channels.size)
+		embed.setFooter(bot.user.username, bot.user.avatarURL);
 		message.reply({embed})
 	}
 	if (message.content.startsWith(prefix + 'help 2')) {
@@ -172,8 +144,8 @@ if (message.content.startsWith(prefix + '8ball')) {
 			embed.setAuthor('EmoteCord Bot')
 			embed.setColor(0x00AE86)
 			embed.setDescription('by Xen#0190')
-			embed.setFooter('EmoteCord Bot v2.3', 'https://image.freepik.com/icones-gratuites/point-d-39-interrogation-dans-un-cercle_318-27276.jpg')
-			embed.setImage('https://media.istockphoto.com/vectors/question-mark-drawing-vector-id537535590')
+			embed.setFooter(bot.user.username, bot.user.avatarURL);
+			embed.setImage('https://i.imgur.com/lHU6JcZ.png')
 			embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
 			embed.setTimestamp()
 			embed.addField('FR <:flag_fr:409768694822993942>', '<frexcuse, donne une excuse Naheulbeukesque')
@@ -245,94 +217,6 @@ if (message.content.startsWith(prefix + '8ball')) {
 	  .catch(error => message.reply(`Sorry ${message.author} I cannot ban because : ${error}`));
 	  message.reply(`${member.user.tag} was ban by ${message.author.tag} because : ${reason}`);
 	}
-	sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-	  if (!row) {
-		sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-	  } else {
-		let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
-		if (curLevel > row.level) {
-		  row.level = curLevel;
-		  sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-		  message.reply(`Yay, you are level **${curLevel}**!`);
-		}
-		sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
-	  }
-	}).catch(() => {
-	  console.error;
-	  sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-		sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-	  });
-	});
-  
-	if (message.content.startsWith(prefix + "profile")) {
-
-		let member = message.mentions.members.first();
-
-		if(!member) {
-			sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-				money.fetchBal(message.author.id).then((i) => { // money.fetchBal grabs the userID, finds it, and puts it into 'i'.
-		const embed = new Discord.RichEmbed()
-		embed.setTitle(message.author.username)
-		embed.setAuthor("EmoteCord Bot")
-		embed.setColor(0x00AE86)
-		embed.setFooter("EmoteCord Bot")
-		embed.setImage(message.author.displayAvatarURL)
-		embed.setTimestamp()
-		embed.addField("LVL", row.level)
-		embed.addField("XP", row.points)
-		embed.addField("๖̶̶̶ζ͜͡Cr", i.money)
-		message.channel.send({embed});
-	})
-});
-		}
-		if(member) {
-			sql.get(`SELECT * FROM scores WHERE userId ="${member.id}"`).then(row => {
-				money.fetchBal(member.id).then((i) => { // money.fetchBal grabs the userID, finds it, and puts it into 'i'.
-				const embed = new Discord.RichEmbed()
-				embed.setTitle(member.displayName)
-				embed.setAuthor("EmoteCord Bot")
-				embed.setColor(0x00AE86)
-				embed.setFooter("EmoteCord Bot")
-				embed.setImage(member.user.displayAvatarURL)
-				embed.setTimestamp()
-				embed.addField("LVL", row.level)
-				embed.addField("XP", row.points)
-				embed.addField("๖̶̶̶ζ͜͡Cr", i.money)
-				message.channel.send({embed});
-			})
-	});
-		}
-		  
-
-
-
-	}
-
-// Example: Getting a daily reward
-if (message.content.startsWith(prefix + 'daily')) {
-				if (money[message.author.username + message.guild.name] != moment().format('L')) {
-						money[message.author.username + message.guild.name] = moment().format('L')
-						money.updateBal(message.author.id, 500).then((i) => { // The daily ends of the day, so everyday they can get a daily bonus, if they missed it, they can't get it back again.
-								message.channel.send({embed: {
-										color: 3447003,
-										description: 'Here are you daily 500 ๖̶̶̶ζ͜͡Cr',
-										author: {
-												name: `${message.author.username}`,
-												icon_url: message.author.avatarURL 
-										}
-								}});
-						})
-				} else {
-						message.channel.send({embed: {
-								color: 3447003,
-								description: 'You already have your daily, come back later !', // When you got your daily already, this message will show up.
-								author: {
-										name: `${message.author.username}`,
-										icon_url: message.author.avatarURL 
-								}
-						}});
-				}
-		}
 		if (message.content.startsWith(prefix + 'md5')) {
 			message.reply("Here it is : " + MD5(argresult));
 		}
@@ -359,18 +243,6 @@ if (message.content.startsWith(prefix + 'daily')) {
 			})
 			price.getCryptoPrice("USD", "BTC").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
 				message.reply("1 BTC = " + obj.price + "$")
-			}).catch(err => {
-				hook.error("Xenohook", err)
-			})
-		}
-		if (message.content.startsWith(prefix + "ltc")) {
-			price.getCryptoPrice("EUR", "LTC").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
-				message.reply("1 LTC = " + obj.price + "€")
-			}).catch(err => {
-				hook.error("Xenohook", err)
-			})
-			price.getCryptoPrice("USD", "LTC").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
-				message.reply("1 LTC = " + obj.price + "$")
 			}).catch(err => {
 				hook.error("Xenohook", err)
 			})
