@@ -10,10 +10,15 @@
 [![](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)]()
 [![](https://img.shields.io/badge/dev%20for-EmoteCord-brightgreen.svg?style=for-the-badge)]()
 
+[![Discord Bots](https://discordbots.org/api/widget/status/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
+[![Discord Bots](https://discordbots.org/api/widget/servers/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
+[![Discord Bots](https://discordbots.org/api/widget/upvotes/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
+[![Discord Bots](https://discordbots.org/api/widget/lib/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
+[![Discord Bots](https://discordbots.org/api/widget/owner/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 
 # Invite the bot : https://discordapp.com/oauth2/authorize?client_id=397007011549675521&scope=bot&permissions=-1
 
-[![DBL Widget](https://discordbots.org/api/widget/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
+[![Discord Bots](https://discordbots.org/api/widget/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 
 # Run it by yourself :
 
