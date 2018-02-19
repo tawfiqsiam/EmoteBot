@@ -16,6 +16,8 @@
 [![Discord Bots](https://discordbots.org/api/widget/lib/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 [![Discord Bots](https://discordbots.org/api/widget/owner/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 
+[![Discord server](https://xen.owns-this.site/f2b5614f.png)](https://discord.gg/8aqUgNk)
+
 # Invite the bot : https://discordapp.com/oauth2/authorize?client_id=397007011549675521&scope=bot&permissions=-1
 
 [![Discord Bots](https://discordbots.org/api/widget/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
@@ -24,14 +26,4 @@
 
 ## look at the wiki : https://github.com/Yaume230/EmoteCord-Bot/wiki
 
-## Contact me on Dm "Jus De Patate#0190" if you need me or join my server : https://discord.gg/8aqUgNk
-
 # **REMEMBER** This is a ~~shit~~ ~~and a bad~~ bot
-
-# Commands :
-#### Fun : <8ball, an 8ball command
-#### Other <ping, ping the bot <messtodev, send message to Xen <invite, invite the bot <serverinfo, give info about the server <EmoteCord, give an invite for EmoteCord <support, get an invite to the support server <userinfo @user, give info about this user
-#### Mods <kick, kick, <ban, ban
-#### Crypto <btc, give BTC price, <eth, give ETH price, <xmr, give XMR price, <ltc, give LTC price, <md5, encrypt your text with md5, <sha256, encrypt your text with sha256
-#### Level/Money <profile, give your profile, <daily, give your daily 500๖̶̶̶ζ͜͡Cr, **Money exchange are impossible !**
-#### International commands <frexcuse, donne une excuse naheulbeukesque
