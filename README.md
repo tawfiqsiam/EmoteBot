@@ -1,6 +1,6 @@
 # EmoteCord Bot
 
-[![https://github.com/Yaume230/EmoteCord-Bot/blob/master/LICENSE](https://img.shields.io/hexpm/l/plug.svg)]()
+[![](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/Yaume230/EmoteCord-Bot/blob/master/LICENSE)
 [![](https://img.shields.io/badge/uses-js-brightgreen.svg)]()
 [![](https://img.shields.io/badge/use%20NodeJS-v9.4-brightgreen.svg)]()
 [![](https://img.shields.io/badge/use%20DiscordJS-v11.0-brightgreen.svg)]()
