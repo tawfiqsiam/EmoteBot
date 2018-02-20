@@ -46,7 +46,7 @@ bot.on('message', message => {
 	}
 	if(message.content.startsWith(prefix + 'userinfo')) {
 		let member = message.mentions.members.first()
-		if(!member) {
+		if(!member && !argresult.startsWith("dbl") && !argresult.startsWith("bd")) {
 			const embed = new Discord.RichEmbed()
 			embed.setTitle(message.author.username)
 			embed.setAuthor("EmoteCord Bot")
@@ -58,7 +58,7 @@ bot.on('message', message => {
 			embed.addField("Name", message.author.username + "#" + message.author.discriminator)
 			message.channel.send({embed});
 		}
-		if(member) {
+		if(member && !argresult.startsWith("dbl") && !argresult.startsWith("bd")) {
 			const embed = new Discord.RichEmbed()
 			embed.setTitle(member.displayName)
 			embed.setAuthor("EmoteCord Bot")
@@ -70,7 +70,82 @@ bot.on('message', message => {
 			embed.addField("Name", member.user.tag)
 			message.channel.send({embed});
 		}
-	}
+		if(member.user.bot) {
+			if(argresult.startsWith("dbl.fr")) {
+					let botid = member.user.id
+					req('https://discordbots.fr/api/v1/bot/' + botid, (e, r, b)=> {
+						let contenu = JSON.parse(b)
+						if(contenu.error === "ce bot n`existe pas ")  {
+							message.channel.send("Not a bot, or not listed");
+						} else {
+					const embed = new Discord.RichEmbed()
+						embed.setTitle(contenu.name)
+						embed.setAuthor(bot.user.username, bot.user.avatarURL)
+						embed.setColor(0x00AE86)
+						embed.setFooter(bot.user.username, bot.user.avatarURL);
+						embed.setImage(contenu.avatar)
+						embed.setTimestamp()
+						embed.addField(contenu.name, contenu.shortDesc)
+						embed.addField("Approved", contenu.approved === true ? "Yes ✅" : "No ❎")
+						embed.addField("Server count", contenu.count)
+						embed.addField("Lib used", contenu.lib)
+						embed.addField("Prefix", contenu.prefix)
+						message.channel.send({embed});
+						}
+					})
+				}
+				
+			if(argresult.startsWith("dbl.org")) {
+				let botid = member.user.id
+					req('https://discordbots.org/api/bots/' + botid, (e, r, b)=> {
+						let contenu = JSON.parse(b)
+					if(contenu.error === "Not found")  {
+						message.channel.send("Not a bot, or not listed");
+					} else {
+					const embed = new Discord.RichEmbed()
+						embed.setTitle(contenu.username)
+						embed.setAuthor(bot.user.username, bot.user.avatarURL)
+						embed.setColor(0x00AE86)
+						embed.setFooter(bot.user.username, bot.user.avatarURL);
+						embed.setImage('https://i.imgur.com/lHU6JcZ.png')
+						embed.setTimestamp()
+						embed.addField(contenu.username, contenu.shortdesc)
+						embed.addField("Approved", contenu.certifiedBot === true ? "Yes ✅" : "No ❎")
+						embed.addField("Server count", contenu.server_count)
+						embed.addField("Lib used", contenu.lib)
+						embed.addField("Prefix", contenu.prefix)
+						embed.addField("Upvotes", contenu.points)
+						message.channel.send({embed});
+					}
+					})
+				}
+				if(argresult.startsWith("bd.pw")) {
+					let botid = member.user.id
+					req({
+					url:"https://bots.discord.pw/api/bots/" + botid,
+					headers:{
+					   "Authorization":config.bdpwtoken
+					}}, (e, r, b) =>{
+						contenu = JSON.parse(b)
+						if(contenu.error === "Bot user ID not found")  {
+							message.channel.send("Not a bot, or not listed");
+						} else {
+						const embed = new Discord.RichEmbed()
+							embed.setTitle(contenu.name)
+							embed.setAuthor(bot.user.username, bot.user.avatarURL)
+							embed.setColor(0x00AE86)
+							embed.setFooter(bot.user.username, bot.user.avatarURL);
+							embed.setImage('https://i.imgur.com/lHU6JcZ.png')
+							embed.setTimestamp()
+							embed.addField(contenu.name, contenu.description)
+							embed.addField("Lib used", contenu.library)
+							embed.addField("Prefix", contenu.prefix)
+							message.channel.send({embed});
+						}
+						})
+				}
+					}
+			}
 	if (message.content.startsWith(adminprefix + 'setgame')) {
 		if (message.author.id != OWNERID && message.author.id != OWNERID2 && message.author.id != OWNERID3) {
 			message.reply("You arent bot owner :/")
@@ -111,24 +186,24 @@ if (message.content.startsWith(prefix + '8ball')) {
 	var truc2 = Math.floor(Math.random()*truc.length);
 	message.reply(truc[truc2])
 }
-if (message.content.startsWith(prefix + 'help')) {
-	const embed = new Discord.RichEmbed()
-		embed.setTitle('Help !')
-		embed.setAuthor('EmoteCord Bot')
-		embed.setColor(0x00AE86)
-		embed.setDescription('by Jus De Patate#0190')
-		embed.setFooter(bot.user.username, bot.user.avatarURL);
-		embed.setImage('https://i.imgur.com/lHU6JcZ.png')
-		embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
-		embed.setTimestamp()
-		embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command')
-		embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<EmoteCord, give an invite for EmoteCord\n<support, get an invite to the support server\n<userinfo @user, give info about this user', true)
-		embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
-		embed.addField('Crypto <:lock:405711204971970571>', "<btc, give BTC price\n<eth, give ETH price\n<xmr, give XMR price\n<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
-		embed.addField('Other Language <:flag_fr:409768694822993942>', '<help 2, give international commands', true);
-		embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.2/NodeJS 9.4.0', true);
-	message.reply({embed});
-}
+	if (message.content.startsWith(prefix + 'help')) {
+				const embed = new Discord.RichEmbed()
+					embed.setTitle('Help !')
+					embed.setAuthor('EmoteCord Bot')
+					embed.setColor(0x00AE86)
+					embed.setDescription('by Jus De Patate#0190')
+					embed.setFooter(bot.user.username, bot.user.avatarURL);
+					embed.setImage('https://i.imgur.com/lHU6JcZ.png')
+					embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
+					embed.setTimestamp()
+					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command')
+					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<emotecord, give an invite for EmoteCord\n<support, get an invite to the support server\n<userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)', true)
+					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '[Please use Section 9984 instead](https://github.com/Yaume230/Section-9984)\n<kick, kick\n<ban, ban', true);
+					embed.addField('Crypto <:lock:405711204971970571>', "<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
+					embed.addField('Other Language <:flag_fr:409768694822993942>', '<help 2, give international commands', true);
+					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.2/NodeJS 9.4.0', true);
+				message.reply({embed});
+	}
 	if (message.content.startsWith(prefix + 'botinfo')) {
 		const embed = new Discord.RichEmbed()
 		embed.setTitle("Bot Info")
