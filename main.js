@@ -196,11 +196,11 @@ if (message.content.startsWith(prefix + '8ball')) {
 					embed.setImage('https://i.imgur.com/lHU6JcZ.png')
 					embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
 					embed.setTimestamp()
-					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command')
+					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command\n<dog, random dog\n<cat, random cat\n<dawae, do you know da wae ?\n<facepalm, facepalm\n<hug, hug someone !\n<nut, kick in the nut\n<kiss, kiss someone\nslap, slap someone')
 					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<emotecord, give an invite for EmoteCord\n<support, get an invite to the support server\n<userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)', true)
 					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '[Please use Section 9984 instead](https://github.com/Yaume230/Section-9984)\n<kick, kick\n<ban, ban', true);
 					embed.addField('Crypto <:lock:405711204971970571>', "<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
-					embed.addField('Other Language <:flag_fr:409768694822993942>', '<help 2, give international commands', true);
+					embed.addField('Other Language <:flag_fr:409768694822993942>', '<frexcuse, donne une excuse Naheulbeukesque', true);
 					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.2/NodeJS 9.4.0', true);
 				message.reply({embed});
 	}
@@ -213,20 +213,6 @@ if (message.content.startsWith(prefix + '8ball')) {
 		embed.setFooter(bot.user.username, bot.user.avatarURL);
 		message.reply({embed})
 	}
-	if (message.content.startsWith(prefix + 'help 2')) {
-		const embed = new Discord.RichEmbed()
-			embed.setTitle('Help !')
-			embed.setAuthor('EmoteCord Bot')
-			embed.setColor(0x00AE86)
-			embed.setDescription('by Xen#0190')
-			embed.setFooter(bot.user.username, bot.user.avatarURL);
-			embed.setImage('https://i.imgur.com/lHU6JcZ.png')
-			embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
-			embed.setTimestamp()
-			embed.addField('FR <:flag_fr:409768694822993942>', '<frexcuse, donne une excuse Naheulbeukesque')
-			embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.0/NodeJS 9.4.0', true);
-		message.reply({embed});
-}
 	if (message.content.startsWith(prefix + 'emotecord')) {
 		message.channel.send("EmoteCord : https://discord.gg/QCNzekJ do <support to have the support server")
 	}
@@ -350,4 +336,112 @@ if (message.content.startsWith(prefix + '8ball')) {
 		  
 		  message.channel.send({embed});
 		}
+		if(message.content.startsWith(prefix + "dog")) {
+			req('https://random.dog/woof.json?filter=mp4,webm', (e, r, b)=> {
+				let contenu = JSON.parse(b)
+			const embed = new Discord.RichEmbed()
+				embed.setTitle("random.dog")
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+				embed.setImage(contenu.url)
+				embed.setTimestamp()
+				message.channel.send({embed});
+			})
+		}
+		if(message.content.startsWith(prefix + "cat")) {
+			req('http://random.cat/meow?filter=mp4,webm', (e, r, b)=> {
+				let contenu = JSON.parse(b)
+			const embed = new Discord.RichEmbed()
+				embed.setTitle("random.cat")
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+				embed.setImage(contenu.file)
+				embed.setTimestamp()
+				message.channel.send({embed});
+			})
+		}
+		if(message.content.startsWith(prefix + "slap")) {
+		let member = message.mentions.members.first()
+		if(!member) message.reply("auto-slap ?")
+		else {
+			const embed = new Discord.RichEmbed()
+				embed.setTitle(message.author.username + " slap " + member.user.username)
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+				embed.setImage("https://media1.tenor.com/images/49de17c6f21172b3abfaf5972fddf6d6/tenor.gif")
+				embed.addField("Rip " + member.user.username, "¯\_(ツ)_/¯")
+				embed.setTimestamp()
+				message.channel.send({embed});
+		}
+		}
+		if(message.content.startsWith(prefix + "kiss")) {
+			let member = message.mentions.members.first()
+			if(!member) message.reply("auto-kiss ?")
+			else {
+				const embed = new Discord.RichEmbed()
+					embed.setTitle(message.author.username + " kiss " + member.user.username)
+					embed.setAuthor(bot.user.username, bot.user.avatarURL)
+					embed.setColor(0x00AE86)
+					embed.setFooter(bot.user.username, bot.user.avatarURL);
+					embed.setImage("https://media1.tenor.com/images/8438e6772a148e62f4c64332ea7da9e8/tenor.gif")
+					embed.addField("Love is beautiful", ":)")
+					embed.setTimestamp()
+					message.channel.send({embed});
+			}
+			}
+		if(message.content.startsWith(prefix + "nut")) {
+				let member = message.mentions.members.first()
+				if(!member) message.reply("auto-kick-in-the-nuts ?")
+				else {
+					const embed = new Discord.RichEmbed()
+						embed.setTitle(message.author.username + " kick the nuts of " + member.user.username)
+						embed.setAuthor(bot.user.username, bot.user.avatarURL)
+						embed.setColor(0x00AE86)
+						embed.setFooter(bot.user.username, bot.user.avatarURL);
+						embed.setImage("https://media1.tenor.com/images/348eae99cbaf68283903d74ee85e67ce/tenor.gif")
+						embed.addField("Rip the nuts of " + member.user.username, "¯\_(ツ)_/¯")
+						embed.setTimestamp()
+						message.channel.send({embed});
+				}
+				}
+				if(message.content.startsWith(prefix + "hug")) {
+					let member = message.mentions.members.first()
+					if(!member) message.reply("auto-hug ?")
+					else {
+						const embed = new Discord.RichEmbed()
+							embed.setTitle(message.author.username + " hug " + member.user.username)
+							embed.setAuthor(bot.user.username, bot.user.avatarURL)
+							embed.setColor(0x00AE86)
+							embed.setFooter(bot.user.username, bot.user.avatarURL);
+							embed.setImage("https://media1.tenor.com/images/d7529f6003b20f3b21f1c992dffb8617/tenor.gif")
+							embed.addField("Love is beautiful", ":)")
+							embed.setTimestamp()
+							message.channel.send({embed});
+					}
+					}
+					if(message.content.startsWith(prefix + "facepalm")) {
+							const embed = new Discord.RichEmbed()
+								embed.setTitle(message.author.username + " facepalm")
+								embed.setAuthor(bot.user.username, bot.user.avatarURL)
+								embed.setColor(0x00AE86)
+								embed.setFooter(bot.user.username, bot.user.avatarURL);
+								embed.setImage("https://media1.tenor.com/images/0f78af841f453545a036b6cceb3620cc/tenor.gif")
+								embed.addField("Facepalmed", "¯\_(ツ)_/¯")
+								embed.setTimestamp()
+								message.channel.send({embed});
+						}
+						if(message.content.startsWith(prefix + "dawae")) {
+							const embed = new Discord.RichEmbed()
+								embed.setTitle(message.author.username + " KNOW DA WAE !")
+								embed.setAuthor(bot.user.username, bot.user.avatarURL)
+								embed.setColor(0x00AE86)
+								embed.setFooter(bot.user.username, bot.user.avatarURL);
+								embed.setImage("https://media1.tenor.com/images/96d8a6e5daebe9d1ac5ea47f39e74fa6/tenor.gif")
+								embed.addField("OMG ! HE KNOW DA WAE !!", "😱")
+								embed.setTimestamp()
+								message.channel.send({embed});
+						}
 });
