@@ -44,7 +44,7 @@ bot.on('message', message => {
 		message.react('🏓')
 		message.channel.send(`:ping_pong: \`${Date.now() - message.createdTimestamp} ms\``);
 	}
-	if(message.content.startsWith(prefix + 'userinfo')) {
+if(message.content.startsWith(prefix + 'userinfo')) {
 		let member = message.mentions.members.first()
 		if(!member && !argresult.startsWith("dbl") && !argresult.startsWith("bd")) {
 			const embed = new Discord.RichEmbed()
@@ -70,13 +70,16 @@ bot.on('message', message => {
 			embed.addField("Name", member.user.tag)
 			message.channel.send({embed});
 		}
+		if(!member) {
+			console.log("noting")
+		} else {
 		if(member.user.bot) {
 			if(argresult.startsWith("dbl.fr")) {
 					let botid = member.user.id
 					req('https://discordbots.fr/api/v1/bot/' + botid, (e, r, b)=> {
 						let contenu = JSON.parse(b)
 						if(contenu.error === "ce bot n`existe pas ")  {
-							message.channel.send("Not a bot, or not listed");
+							message.channel.send("Not a bot, or not listed (or not approved by mods)");
 						} else {
 					const embed = new Discord.RichEmbed()
 						embed.setTitle(contenu.name)
@@ -89,7 +92,9 @@ bot.on('message', message => {
 						embed.addField("Approved", contenu.approved === true ? "Yes ✅" : "No ❎")
 						embed.addField("Server count", contenu.count)
 						embed.addField("Lib used", contenu.lib)
+						embed.addField("Added on", moment(contenu.timestamp).format("D MMMM Y on LTS"))
 						embed.addField("Prefix", contenu.prefix)
+						embed.addField("Links", "[Invitation](" + contenu.invite + ")\n[DBL.fr](https://discordbots.fr/bots/" + botid + " )\n[Github](" + contenu.github + ")\n[Website](" + contenu.website + ")")
 						message.channel.send({embed});
 						}
 					})
@@ -100,7 +105,7 @@ bot.on('message', message => {
 					req('https://discordbots.org/api/bots/' + botid, (e, r, b)=> {
 						let contenu = JSON.parse(b)
 					if(contenu.error === "Not found")  {
-						message.channel.send("Not a bot, or not listed");
+						message.channel.send("Not a bot, or not listed (or not approved by mods)");
 					} else {
 					const embed = new Discord.RichEmbed()
 						embed.setTitle(contenu.username)
@@ -110,10 +115,12 @@ bot.on('message', message => {
 						embed.setImage('https://i.imgur.com/lHU6JcZ.png')
 						embed.setTimestamp()
 						embed.addField(contenu.username, contenu.shortdesc)
-						embed.addField("Approved", contenu.certifiedBot === true ? "Yes ✅" : "No ❎")
+						embed.addField("Certified ?", contenu.certifiedBot === true ? "Yes ✅" : "No ❎")
 						embed.addField("Server count", contenu.server_count)
 						embed.addField("Lib used", contenu.lib)
+						embed.addField("Added on", contenu.date)
 						embed.addField("Prefix", contenu.prefix)
+						embed.addField("Links", "[Invitation](" + contenu.invite + ")\n[DBL.org](https://discordbots.org/bot/" + botid + " )\n[Github](" + contenu.github + ")\n[Website](" + contenu.website + ")")
 						embed.addField("Upvotes", contenu.points)
 						message.channel.send({embed});
 					}
@@ -128,7 +135,7 @@ bot.on('message', message => {
 					}}, (e, r, b) =>{
 						contenu = JSON.parse(b)
 						if(contenu.error === "Bot user ID not found")  {
-							message.channel.send("Not a bot, or not listed");
+							message.channel.send("Not a bot, or not listed (or not approved by mods)");
 						} else {
 						const embed = new Discord.RichEmbed()
 							embed.setTitle(contenu.name)
@@ -140,11 +147,13 @@ bot.on('message', message => {
 							embed.addField(contenu.name, contenu.description)
 							embed.addField("Lib used", contenu.library)
 							embed.addField("Prefix", contenu.prefix)
+							embed.addField("Links", "[Invitation](" + contenu.invite_url +")\n[bd.pw](https://bots.discord.pw/bots/" + botid + ")\n[Website](" + contenu.website + ")")
 							message.channel.send({embed});
 						}
 						})
 				}
 					}
+				}
 			}
 	if (message.content.startsWith(adminprefix + 'setgame')) {
 		if (message.author.id != OWNERID && message.author.id != OWNERID2 && message.author.id != OWNERID3) {
@@ -239,8 +248,8 @@ if (message.content.startsWith(prefix + '8ball')) {
 		message.reply("https://discordapp.com/oauth2/authorize?client_id=" + bot.user.id + "&scope=bot&permissions=-1")
 	}
 	if (message.content.startsWith(prefix + 'kick')) {
-		if(!message.member.roles.some(r=>["admins", "mods", "staff"].includes(r.name)) )
-		return message.reply("You don't have role named `mods`, `admins` or `staff` !");
+		if(!message.member.hasPermission('KICK_MEMBERS'))
+		return message.reply("You can't kick guys :/ !");
 	  
 	  // Let's first check if we have a member and if we can kick them!
 	  // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
@@ -261,8 +270,8 @@ if (message.content.startsWith(prefix + '8ball')) {
   message.reply(`${member.user.tag} was kick by ${message.author.tag} because : ${reason}`);
 }
 	if (message.content.startsWith(prefix + 'ban')) {
-		if(!message.member.roles.some(r=>["admins"].includes(r.name)) )
-		return message.reply("You don't have role named `admins` !");
+		if(!message.member.hasPermission('BAN_MEMBERS'))
+		return message.reply("You can't ban guys :/ !");
 	  
 	  let member = message.mentions.members.first();
 	  if(!member)
@@ -367,11 +376,13 @@ if (message.content.startsWith(prefix + '8ball')) {
 		if(!member) message.reply("auto-slap ?")
 		else {
 			const embed = new Discord.RichEmbed()
+			var rdmgif =["https://media1.tenor.com/images/b012d461b2ca1f2adaf3a02ea8fb0117/tenor.gif", "https://media1.tenor.com/images/6aa432caad8e3272d21a68ead3629853/tenor.gif", "https://media1.tenor.com/images/0720ffb69ab479d3a00f2d4ac7e0510c/tenor.gif", "https://media1.tenor.com/images/40b472c5ebd2b741690f852cf3cdd76a/tenor.gif", "https://media1.tenor.com/images/49de17c6f21172b3abfaf5972fddf6d6/tenor.gif"];
+			var rdmgif2 = Math.floor(Math.random()*rdmgif.length);
 				embed.setTitle(message.author.username + " slap " + member.user.username)
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
-				embed.setImage("https://media1.tenor.com/images/49de17c6f21172b3abfaf5972fddf6d6/tenor.gif")
+				embed.setImage(rdmgif[rdmgif2])
 				embed.addField("Rip " + member.user.username, "¯\_(ツ)_/¯")
 				embed.setTimestamp()
 				message.channel.send({embed});
@@ -382,11 +393,13 @@ if (message.content.startsWith(prefix + '8ball')) {
 			if(!member) message.reply("auto-kiss ?")
 			else {
 				const embed = new Discord.RichEmbed()
+				var rdmgif =["https://media1.tenor.com/images/8438e6772a148e62f4c64332ea7da9e8/tenor.gif", "https://media1.tenor.com/images/2fc5b4ed1a312bbbc240a29d2e587b31/tenor.gif", "https://media1.tenor.com/images/45298a29826f3ec1f29885b9f862ea57/tenor.gif", "https://media1.tenor.com/images/0df97f6253419235268ca1a2efdb8e6a/tenor.gif"];
+				var rdmgif2 = Math.floor(Math.random()*rdmgif.length);
 					embed.setTitle(message.author.username + " kiss " + member.user.username)
 					embed.setAuthor(bot.user.username, bot.user.avatarURL)
 					embed.setColor(0x00AE86)
 					embed.setFooter(bot.user.username, bot.user.avatarURL);
-					embed.setImage("https://media1.tenor.com/images/8438e6772a148e62f4c64332ea7da9e8/tenor.gif")
+					embed.setImage(rdmgif[rdmgif2])
 					embed.addField("Love is beautiful", ":)")
 					embed.setTimestamp()
 					message.channel.send({embed});
@@ -397,11 +410,13 @@ if (message.content.startsWith(prefix + '8ball')) {
 				if(!member) message.reply("auto-kick-in-the-nuts ?")
 				else {
 					const embed = new Discord.RichEmbed()
+					var rdmgif =["https://media1.tenor.com/images/348eae99cbaf68283903d74ee85e67ce/tenor.gif", "https://media1.tenor.com/images/e98b912ad0f5e74e53efc1c20aea59be/tenor.gif", "https://media1.tenor.com/images/f03ec2fc5f712b344f5b35d644140236/tenor.gif", "https://media1.tenor.com/images/cc5bc86ee3be2219b0976d320ecf5276/tenor.gif", "https://media1.tenor.com/images/9982265fa4c53204c66ea7fc9997aee0/tenor.gif"];
+					var rdmgif2 = Math.floor(Math.random()*rdmgif.length);
 						embed.setTitle(message.author.username + " kick the nuts of " + member.user.username)
 						embed.setAuthor(bot.user.username, bot.user.avatarURL)
 						embed.setColor(0x00AE86)
 						embed.setFooter(bot.user.username, bot.user.avatarURL);
-						embed.setImage("https://media1.tenor.com/images/348eae99cbaf68283903d74ee85e67ce/tenor.gif")
+						embed.setImage(rdmgif[rdmgif2])
 						embed.addField("Rip the nuts of " + member.user.username, "¯\_(ツ)_/¯")
 						embed.setTimestamp()
 						message.channel.send({embed});
@@ -412,11 +427,13 @@ if (message.content.startsWith(prefix + '8ball')) {
 					if(!member) message.reply("auto-hug ?")
 					else {
 						const embed = new Discord.RichEmbed()
+						var rdmgif =["https://media1.tenor.com/images/d7529f6003b20f3b21f1c992dffb8617/tenor.gif", "https://media1.tenor.com/images/87ce1545bd99ccb269005e3ad706f6d8/tenor.gif", "https://media1.tenor.com/images/24ac13447f9409d41c1aecb923aedf81/tenor.gif", "https://media1.tenor.com/images/ce9dc4b7e715cea12604f8dbdb49141b/tenor.gif", "https://media1.tenor.com/images/0febed6df8b2f8aa52d885054782be15/tenor.gif"];
+						var rdmgif2 = Math.floor(Math.random()*rdmgif.length);
 							embed.setTitle(message.author.username + " hug " + member.user.username)
 							embed.setAuthor(bot.user.username, bot.user.avatarURL)
 							embed.setColor(0x00AE86)
 							embed.setFooter(bot.user.username, bot.user.avatarURL);
-							embed.setImage("https://media1.tenor.com/images/d7529f6003b20f3b21f1c992dffb8617/tenor.gif")
+							embed.setImage(rdmgif[rdmgif2])
 							embed.addField("Love is beautiful", ":)")
 							embed.setTimestamp()
 							message.channel.send({embed});
@@ -424,24 +441,363 @@ if (message.content.startsWith(prefix + '8ball')) {
 					}
 					if(message.content.startsWith(prefix + "facepalm")) {
 							const embed = new Discord.RichEmbed()
+							var rdmgif =["https://media1.tenor.com/images/0f78af841f453545a036b6cceb3620cc/tenor.gif", "https://media1.tenor.com/images/06655070b3cc8faaff4824eee848adc0/tenor.gif", "https://media1.tenor.com/images/fa7be96565d6a62208b61497b92576b7/tenor.gif", "https://media1.tenor.com/images/943c9749155767d167660c6a8e45357c/tenor.gif", "https://media1.tenor.com/images/662a736b3f807c6265b79981f115fd87/tenor.gif", "https://media1.tenor.com/images/0111c62d35b8e0ad45a24ee6c01e9279/tenor.gif", "https://media1.tenor.com/images/a4ffc23c3537fc4eb8c076c4fb072f32/tenor.gif", "https://media1.tenor.com/images/f758feb1edaa0718d9cfe2fd7701a8dd/tenor.gif"];
+							var rdmgif2 = Math.floor(Math.random()*rdmgif.length);
 								embed.setTitle(message.author.username + " facepalm")
 								embed.setAuthor(bot.user.username, bot.user.avatarURL)
 								embed.setColor(0x00AE86)
 								embed.setFooter(bot.user.username, bot.user.avatarURL);
-								embed.setImage("https://media1.tenor.com/images/0f78af841f453545a036b6cceb3620cc/tenor.gif")
+								embed.setImage(rdmgif[rdmgif2])
 								embed.addField("Facepalmed", "¯\_(ツ)_/¯")
 								embed.setTimestamp()
 								message.channel.send({embed});
 						}
 						if(message.content.startsWith(prefix + "dawae")) {
 							const embed = new Discord.RichEmbed()
-								embed.setTitle(message.author.username + " KNOW DA WAE !")
+							var rdmgif =["https://media1.tenor.com/images/96d8a6e5daebe9d1ac5ea47f39e74fa6/tenor.gif", "https://media1.tenor.com/images/478711ecd6da7f70165fe3c0f89f0387/tenor.gif", "https://media1.tenor.com/images/dc3997030a482257e718b36aed35a360/tenor.gif", "https://media1.tenor.com/images/4263bc7bd673f742919bd69eaeccae77/tenor.gif", "https://media1.tenor.com/images/f0cf485fcf480561d42f6f19fb2b7e33/tenor.gif", "https://media1.tenor.com/images/63da1c7225c52c7184dfb89d2cdd8280/tenor.gif"];
+							var rdmgif2 = Math.floor(Math.random()*rdmgif.length);
+								embed.setTitle("DO KNOW DA WAE ?")
 								embed.setAuthor(bot.user.username, bot.user.avatarURL)
 								embed.setColor(0x00AE86)
 								embed.setFooter(bot.user.username, bot.user.avatarURL);
-								embed.setImage("https://media1.tenor.com/images/96d8a6e5daebe9d1ac5ea47f39e74fa6/tenor.gif")
-								embed.addField("OMG ! HE KNOW DA WAE !!", "😱")
+								embed.setImage(rdmgif[rdmgif2])
+								embed.addField("DO YOU KNOW DA WAE !!", "DA WAEEEEEE !")
 								embed.setTimestamp()
 								message.channel.send({embed});
 						}
+			if(message.content.startsWith(prefix + "embed")) {
+				// All of this are made by KanpekiUsagi#6908
+				// All credits goes to him <3
+				let desc, color, author, authorurl, imageurl, hidden, title, footer, helping;
+	let args = message.content.split(' ');
+	args.shift();
+	while(args[0]=="") args.shift();
+	if(args.length==0) return message.channel.send("**__Syntax :__** `<embed argument: valeur|argument: valeur|argAdmin`\nYou can create embed with me.\n__How to use me :__ \n<embed content:Hello World!\n\nIn this example, `content` is the argument and `Hello World!` is the text.\n\n__Args list:__`content`,`color`,`image`,`footer`,`title`\n__Args list admin:__ `hide` (not hide:yes, just `hide`)");
+	args = args.join(' ').split('|');
+	for(i in args){
+        if(args[i].replace(/ /g,'').replace(/\n/g,'').toLowerCase().startsWith('content:')){
+            arg = args[i].split(' ');
+            while(arg[0]==""||arg[0]=="\n") arg.shift();
+            while(arg[0].startsWith('\n')) arg[0]=arg[0].substr(1);
+            if(arg[0].length=='content:'.length) arg.shift();
+            else arg[0] = arg[0].substr('content:'.length)
+            desc = arg.join(' ');
+        }else if(args[i].replace(/ /g,'').replace(/\n/g,'').toLowerCase().startsWith('color:')){
+			arg = args[i].split(' ');
+			while(arg[0]==""||arg[0]=="\n") arg.shift();
+			while(arg[0].startsWith('\n')) arg[0]=arg[0].substr(1)
+			if(arg[0].length=='color:'.length) arg.shift();
+			else arg[0] = arg[0].substr('color:'.length)
+			arg = arg.join(' ');
+			if(arg.toLowerCase().startsWith('rgb(')||arg.startsWith('(')){
+				arg = arg.split(',');
+				if(arg.length!=3) return message.channel.send('Error:\nPlease use valid number separated by `,`\n__Ex :__\ncolor : rgb(255,0,0)');
+				arg[0] = arg[0].replace(/rgb/i,"").replace('(',"");
+				arg[2] = arg[2].replace(')',"");
+				if(parseInt(arg[0]).toString()=='NaN') return message.channel.send('Error:\nSettings of the color red must be a valid number.');
+				if(parseInt(arg[1]).toString()=='NaN') return message.channel.send('Error:\nSettings of the color green must be a valid number.');
+				if(parseInt(arg[2]).toString()=='NaN') return message.channel.send('Error:\nSettings of the color blue must be a valid number.');
+				let r = parseInt(arg[0]);
+				let g = parseInt(arg[1]);
+				let b = parseInt(arg[2]);
+				if(!(-1<r&&r<256)) return message.channel.send('Error:\nSettings of the color red must be from 0 to 255.');
+				if(!(-1<g&&g<256)) return message.channel.send('Error:\nSettings of the color green must be from 0 to 255.');
+				if(!(-1<b&&b<256)) return message.channel.send('Error:\nSettings of the color blue must be from 0 to 255.');
+				color = r*0x10000+g*0x100+b;
+			}else if(arg.startsWith('#')){
+				if(arg.substr(1).replace(/[^0-9a-f]/gi,"")!=arg.substr(1)) return message.channel.send('Error:\nNon hexadecimal args.');
+				if(arg.length>7) return message.channel.send('Error:\nMax is #FFFFFF.');
+				color = parseInt(arg.replace('#',"0x"));
+			}else if(arg.replace(" ","").toLowerCase()=="blue") color=0x0000FF;
+			else if(arg.replace(" ","").toLowerCase()=="red") color=0xFF0000;
+			else if(arg.replace(" ","").toLowerCase()=="green") color=0x00FF00;
+			else if(arg.replace(" ","").toLowerCase()=="yellow") color=0xFFFF00;
+			else if(arg.replace(" ","").toLowerCase()=="violet") color=0xA000A0;
+			else if(arg.replace(" ","").toLowerCase()=="rose") color=0xFF00FF;
+			else if(arg.replace(" ","").toLowerCase()=="orange") color=0xFF3000;
+			else if(arg.replace(" ","").toLowerCase()=="noire") color=0x010000;
+			else if(arg.replace(" ","").toLowerCase()=="blanc") color=0xFFFFFF;
+			else if(arg.replace(" ","").toLowerCase()=="cyan") color=0x00FFFF;
+		}else if(args[i].replace(/ /g,'').replace(/\n/g,'').toLowerCase().startsWith('image:')){
+			arg = args[i].split(' ');
+			while(arg[0]==""||arg[0]=="\n") arg.shift();
+			while(arg[0].startsWith('\n')) arg[0]=arg[0].substr(1)
+			if(arg[0].length=='image:'.length) arg.shift();
+			else arg[0] = arg[0].substr('image:'.length);
+			imageurl = arg.join(' ').replace(/ /g,"");
+			if(!imageurl.startsWith('http')) return message.channel.send('Error:\nInvalid image link.');
+		}else if(args[i].replace(/ /g,'').replace(/\n/g,'').toLowerCase().startsWith('title:')){
+			arg = args[i].split(' ');
+			while(arg[0]==""||arg[0]=="\n") arg.shift();
+			while(arg[0].startsWith('\n')) arg[0]=arg[0].substr(1)
+			if(arg[0].length=='title:'.length) arg.shift();
+			else arg[0] = arg[0].substr('title:'.length);
+			title = arg.join(' ');
+		}else if(args[i].replace(/ /g,'').replace(/\n/g,'').toLowerCase().startsWith('footer:')){
+			arg = args[i].split(' ');
+			while(arg[0]==""||arg[0]=="\n") arg.shift();
+			while(arg[0].startsWith('\n')) arg[0]=arg[0].substr(1)
+			if(arg[0].length=='footer:'.length) arg.shift();
+			else arg[0] = arg[0].substr('footer:'.length);
+			footer = arg.join(' ');
+		}else if(args[i].replace(/ /g,'').replace(/\n/g,'').toLowerCase() =='hide'){
+			if(message.guild){
+				if(message.member.hasPermission('MANAGE_MESSAGES')){
+					author=null;
+					authorurl=null;
+					hidden=true;
+				}
+			}
+		}
+	}
+	if(helping) return;
+	if(hidden) message.delete();
+	else{
+		author=message.author.tag;
+		authorurl=message.author.displayAvatarURL;
+
+	}
+	message.channel.send({embed:{
+		author:{
+			name:author,
+			iconURL:authorurl
+		},
+		title:title,
+		description:desc,
+		color:color,
+		image:{
+			url:imageurl
+		},
+		footer:{
+			text:footer
+		}
+	}})
+}
+if(message.content.startsWith(prefix + "gtn")) {
+
+				// All of this are made by KanpekiUsagi#6908
+				// All credits goes to him <3
+
+	if(!message.guild) return;
+	let args = message.content.split(' ');
+	if(args[1]=="start"){
+		GTNs(message);
+	}else if(args[1]=="tips"){
+		GTNt(message);
+	}else if(parseInt(args[1]).toString()!="NaN"){
+		GTNg(message);
+	}else{
+		GTNh(message)
+	}
+function GTNgo(channel, reason){
+	channel.send("Game Over.\nYou've lost ! \nReason: "+reason);
+	channel.currentGame.exists = false;
+
+}
+function GTNs(message){
+	if(message.channel.currentGame){
+		if(message.channel.currentGame.exists) return message.channel.send('Only 1 game per guilds.');
+	}
+	message.channel.currentGame={
+		player:message.author.id,
+		theNum: Math.floor(Math.random()*1000),
+		type:"Guess The Number",
+		createdAt:message.createdTimestamp,
+		exists:true,
+		tips:"➡ I'm left than 1000.\n➡ I'm not a negative number.",
+		valeur:0,
+		chances:3
+	}
+	let geimu = message.channel.currentGame;
+	let random = Math.floor(Math.random()*1000);
+	if(geimu.theNum%2==0) geimu.tips+="\n➡ I'm pair.";
+	else geimu.tips+="\n➡ I'm not pair.";
+	geimu.tips+="\n➡ I have "+geimu.theNum.toString().length+" number.";
+	geimu.valeur+=geimu.theNum.toString().length;
+	if(geimu.theNum>random) geimu.tips+="\n➡ I'm higher than "+random;
+	if(geimu.theNum<random) geimu.tips+="\n➡ I'm lower than "+random;
+	if(geimu.theNum%random==0) geimu.tips+="\n➡ I'm divisible  by "+random;
+	else if(random%geimu.theNum==0) geimu.tips+="\n➡ I can divide "+random;
+	else geimu.valeur +=1;
+	if(geimu.theNum%5==0) geimu.tips+="\n➡ I'm divisible by 5";
+	else {
+		geimu.tips+="\n➡ The rest by my divison by 5 is "+(geimu.theNum%5);
+		geimu.valeur+=1;
+	}
+	if(geimu.theNum%3==0) geimu.tips+="\n➡  I'm divisible by 3";
+	else {
+		geimu.tips+="\n➡ The rest by my divison by 3 is "+(geimu.theNum%3);
+		geimu.valeur+=1;
+	}
+	message.channel.send("Who am I ?.\nTips in the embed :.\nPS: If you don't see the embed, please check (or ash the owner) if i can send embed link",{
+		embed:{
+			title:"Party of " + message.author.tag,
+			description:geimu.tips+"\n\nOne game per guild !",
+			footer:{
+				text:"You have 3 try. And 60 seconds per try. // KanpekiUsagi#6908"
+			}
+		}
+	})
+	geimu.timeup=gtntimeout(message, geimu)
+}
+function gtntimeout(message, game){
+	return setTimeout(()=>{
+		if(game.chances == 1) return GTNgo(message.channel, "Tardé.");
+		message.channel.send("You left time!\n-1 try !");
+		game.chances=game.chances-1;
+		game.createdAt=message.createdTimestamp;
+		game.timeup=gtntimeout(message, game);
+	}, 60000);
+}
+function GTNg(message){
+	if(message.channel.currentGame){
+		let game = message.channel.currentGame
+		if(game.exists){
+			if(game.player==message.author.id){
+				clearTimeout(game.timeup);
+				let guess = parseInt(message.content.split(' ')[1]);
+				if(guess==game.theNum){
+					message.channel.send('✅ GG! It\'s me!\nYou won the game');
+					if(users.users.indexOf(message.author.id)==-1) users.users.push(message.author.id);
+					if(users[message.author.id]){
+						users[message.author.id].gScore+=game.valeur;
+						if(users[message.author.id].gGTN){
+							users[message.author.id].gGTN.streak+=1;
+							users[message.author.id].gGTN.wins+=1;
+						}else users[message.author.id].gGTN = {
+							streak:1,
+							wins:1
+						}
+					}else users[message.author.id] ={
+						gGTN:{
+							streak:1,
+							wins:1
+						},
+						gScore:game.valeur
+					}
+					message.channel.currentGame.exists = false;
+					return;
+				}else{
+					if(game.chances == 1) return GTNgo(message.channel, "Wrong number.");
+					if(game.theNum>guess) {
+						game.tips+="\n➡ I'm higher than "+guess;
+						if(game.theNum%guess==0) game.tips+="\n➡ I'm divisible by "+guess;
+						else game.tips+="\n➡ The rest of my divisible by "+guess+" is "+(game.theNum%guess);
+					}
+					else {
+						game.tips+="\n➡ I'm left than "+guess;
+						if(guess%game.theNum==0) game.tips+="\n➡ JI can divide "+guess;
+						else game.tips+="\n➡ When i'm divided by "+guess+", the rest is "+(guess%game.theNum);
+					}
+					message.channel.send('❎Wrong number !.\nPlease do `-qsj tips` another time');
+					game.chances=game.chances-1
+					game.createdAt=message.createdTimestamp;
+					game.timeup = gtntimeout(message, game)
+					if(game.chances==1) message.channel.send('Last chance !')
+
+				}
+			}
+		}
+	}
+}
+function GTNt(message){
+	if(message.channel.currentGame){
+		game = message.channel.currentGame;
+		if(game.exists){
+			message.channel.send({embed:{
+				title:"Game of "+message.guild.members.get(game.player).user.tag,
+				description:game.tips,
+				footer:{
+					text:"Time : "+(60-(message.createdTimestamp-game.createdAt)/1000)+"s for this try. // KanpekiUsagi#6908"
+				}
+			}});
+			return;
+		}
+	}
+	return GTNh(message);
+}
+function GTNh(message){
+	message.channel.send({embed:{
+		title:"Who Am I ?",
+		description:"In this game, you have to guess the number (No worry, i'll help you)\n\n__Args list:__\n`<gtn start` : Start a game\n`<gtn tips` : Tips for this game\n`<gtn <nombre>` : Who Am I ? 😏",
+		footer:{
+			text:"Made by KanpekiUsagi#6908"
+		}
+	}})
+}
+}
+if(message.content.startsWith(prefix + "emoji")) {
+	if (!args) {
+		message.channel.createMessage('Specify an emoji!');
+	}
+	else {
+	const embed = new Discord.RichEmbed()
+	embed.setTitle(`Emoji`)
+	embed.setDescription("Here is the emoji I founded!")
+	embed.setImage("https://discordemoji.com/assets/emoji/" + argresult + ".png")
+	embed.setFooter("Based on discordemoji.com")
+	message.channel.send({embed})
+	}
+}
+if(message.content.startsWith(prefix + "mc")) {
+	let typeapi = args[0]
+	let ip = args[1]
+
+	if(typeapi === "server") {
+	req('https://mcapi.us/server/status?ip=' + ip, (e, r, b)=> {
+		let contenu = JSON.parse(b)
+		if(contenu.online === false) {
+			message.channel.send("Invalid hostname (i use only port `25565`) or offline")
+		} else {
+	const embed = new Discord.RichEmbed()
+		embed.setTitle("mcapi.us")
+		embed.setAuthor(bot.user.username, bot.user.avatarURL)
+		embed.setColor(0x00AE86)
+		embed.setFooter(bot.user.username, bot.user.avatarURL);
+		embed.addField(ip, contenu.motd)
+		embed.addField("Players", contenu.players.now + "/" + contenu.players.max)
+		embed.addField("Version", contenu.server.name)
+		embed.setThumbnail("http://mcapi.de/api/image/favicon/" + ip)
+		embed.setTimestamp()
+		message.channel.send({embed});
+		}
+	})
+	}
+	if(typeapi === "player") {
+		req('https://mcapi.de/api/user/' + ip, (e, r, b)=> {
+			let contenu = JSON.parse(b)
+			if(contenu.premium === false) {
+				message.channel.send("Invalid user or not premium")
+			} else {
+		const embed = new Discord.RichEmbed()
+			embed.setTitle("mcapi.de")
+			embed.setAuthor(bot.user.username, bot.user.avatarURL)
+			embed.setColor(0x00AE86)
+			embed.setFooter("Updated on " + contenu.updated.time + " (tz " + contenu.updated.zone + ")");
+			embed.addField("Premium ?", "Yes ✅")
+			embed.addField("UUID", contenu.uuid)
+			embed.setThumbnail("https://minotar.net/helm/" + ip)
+			embed.setImage("https://minotar.net/body/" + ip)
+			embed.setTimestamp()
+			message.channel.send({embed});
+			}
+		})
+	}
+	if(typeapi === "status") {
+		req('http://mcapi.de/api/game/status/api.mojang.com', (e, r, b)=> {
+			let contenu = JSON.parse(b)
+		const embed = new Discord.RichEmbed()
+			embed.setTitle("mcapi.de")
+			embed.setAuthor(bot.user.username, bot.user.avatarURL)
+			embed.setColor(0x00AE86)
+			embed.setFooter("Updated on " + contenu.updated.time + " (tz " + contenu.updated.zone + ")");
+			embed.addField(contenu.service.part + " " + contenu.service.description, contenu.service.status)
+			embed.setThumbnail("https://pbs.twimg.com/profile_images/658664874856333313/MhnCHMVD_400x400.png")
+			embed.setTimestamp()
+			message.channel.send({embed});
+		})
+	} if(typeapi != "status" && typeapi != "player" && typeapi != "server") {
+		message.channel.send("__Args list :__\n\n`status` : to get MC/Mojang api status\n`player` : to get info about a player\n`server` : to get info about a server")
+	}
+}
 });
