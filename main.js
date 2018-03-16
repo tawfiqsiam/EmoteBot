@@ -15,6 +15,7 @@ var OWNERID3 = process.env.owner3
 const config = require("./config.json");
 bot.login(process.env.BOT_TOKEN);
 var hook = new Webhook(process.env.webhook_url)
+var http = require('http');
 
 bot.on('ready', () => {
 		hook.success(bot.user.tag, bot.user.username + " online !");
