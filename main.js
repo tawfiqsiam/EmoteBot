@@ -15,7 +15,6 @@ var OWNERID3 = process.env.owner3
 const config = require("./config.json");
 bot.login(process.env.BOT_TOKEN);
 var hook = new Webhook(process.env.webhook_url)
-var http = require('http');
 
 bot.on('ready', () => {
 		hook.success(bot.user.tag, bot.user.username + " online !");
@@ -28,13 +27,6 @@ bot.on('ready', () => {
         		dbl.postStats(client.guilds.size);
     		}, 1800000);
 });
-http.createServer(function(req, res) {  
-  res.writeHead(200, {
-    'Content-Type': 'text/html'
-  });
-  res.write('<h1>OMG YOU FOUND EMOTEBOT\'S HEROKU PAGES </h1>');
-  res.end();
-}).listen(8080);
 
 bot.on('guildCreate', guild => {
 	hook.info(bot.user.tag, 'New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
