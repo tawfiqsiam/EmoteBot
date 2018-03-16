@@ -23,12 +23,17 @@ bot.on('ready', () => {
 		console.log(bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
 		bot.user.setActivity("(<help) " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 		bot.user.setUsername(process.env.bot_name);
-		client.on('ready', () => {
     		setInterval(() => {
         		dbl.postStats(client.guilds.size);
     		}, 1800000);
 });
-});
+http.createServer(function(req, res) {  
+  res.writeHead(200, {
+    'Content-Type': 'text/html'
+  });
+  res.write('<h1>OMG YOU FOUND EMOTEBOT\'S HEROKU PAGES </h1>');
+  res.end();
+}).listen(8080);
 
 bot.on('guildCreate', guild => {
 	hook.info(bot.user.tag, 'New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
