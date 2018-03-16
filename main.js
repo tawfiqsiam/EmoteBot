@@ -154,23 +154,6 @@ if(message.content.startsWith(prefix + 'userinfo')) {
 					}
 				}
 			}
-	if (message.content.startsWith(adminprefix + 'setgame')) {
-		if (message.author.id != OWNERID && message.author.id != OWNERID2 && message.author.id != OWNERID3) {
-			message.reply("You arent bot owner :/")
-		}if (message.author.id === OWNERID) {
-			bot.user.setGame(argresult);
-			bot.user.setStatus("online");
-			message.reply("Game changed !");
-		}if (message.author.id === OWNERID2) {
-			bot.user.setGame(argresult);
-			bot.user.setStatus("online");
-			message.reply("Game changed !");
-		}if (message.author.id === OWNERID3) {
-			bot.user.setGame(argresult);
-			bot.user.setStatus("online");
-			message.reply("Game changed !");
-		}
-}
 if (message.content.startsWith(adminprefix + 'membercount')) {
 	if(message.author.id != OWNERID) return;
 	const embed = new Discord.RichEmbed()
@@ -187,7 +170,7 @@ if (message.content.startsWith(adminprefix + 'membercount')) {
 	if (message.content.startsWith(prefix + 'messtodev')) {
 			message.reply("Message sent !!");
 			const sayMessage = args.join(" ");
-			hook.info("Xenohook (messtodev)", message.author.displayName + " (id: " + message.author.id + ") said " + sayMessage);
+			hook.info(message.author.tag, message.author.displayName + " (id: " + message.author.id + ") said " + sayMessage);
 }
 if (message.content.startsWith(prefix + '8ball')) {
 	var truc = ["<:8ball:404631321651052545> I can't say anything", "<:8ball:404631321651052545> It seems like yes...", "<:8ball:404631321651052545> Everything say no...", "<:8ball:404631321651052545> visibly, yes", "<:8ball:404631321651052545> no !"];
@@ -206,7 +189,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 					embed.setTimestamp()
 					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command\n<dog, random dog\n<cat, random cat\n<dawae, do you know da wae ?\n<facepalm, facepalm\n<hug, hug someone !\n<nut, kick in the nut\n<kiss, kiss someone\nslap, slap someone')
 					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<emotecord, give an invite for EmoteCord\n<support, get an invite to the support server\n<userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)', true)
-					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '[Please use Section 9984 instead](https://github.com/Yaume230/Section-9984)\n<kick, kick\n<ban, ban', true);
+					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
 					embed.addField('Crypto <:lock:405711204971970571>', "<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
 					embed.addField('Other Language <:flag_fr:409768694822993942>', '<frexcuse, donne une excuse Naheulbeukesque', true);
 					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.2/NodeJS 9.4.0', true);
