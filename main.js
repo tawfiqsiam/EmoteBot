@@ -3,6 +3,7 @@ const moment = require('moment');
 var Webhook = require("webhook-discord")
 var MD5 = require("crypto-js/md5");
 var SHA256 = require("crypto-js/sha256");
+const DBL = require("dblapi.js");
 let price = require('crypto-price')
 const bot = new Discord.Client();
 var prefix = "<"
