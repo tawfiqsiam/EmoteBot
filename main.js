@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const money = require('discord-money');
 const moment = require('moment');
 var Webhook = require("webhook-discord")
 var MD5 = require("crypto-js/md5");
@@ -8,30 +7,30 @@ let price = require('crypto-price')
 const bot = new Discord.Client();
 var prefix = "<"
 var adminprefix = "<!"
-var OWNERID = "your id"
-var OWNERID2 = "2nd owner id"
-var OWNERID3 = "3e owner id"
+var OWNERID = process.env.owner1
+var OWNERID2 = process.env.owner2
+var OWNERID3 = process.env.owner3
 const config = require("./config.json");
-bot.login(config.token);
-var hook = new Webhook("your webhook url without token" + config.hooktoken)
+bot.login(process.env.BOT_TOKEN);
+var hook = new Webhook(process.env.webhook_url)
 
 bot.on('ready', () => {
-		hook.success("Xenohook", bot.user.username + " online !");
-		hook.info("Xenohook", bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
+		hook.success(bot.user.tag, bot.user.username + " online !");
+		hook.info(bot.user.tag, bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
 		console.log(bot.user.username + " en ligne !");
 		console.log(bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
 		bot.user.setActivity("(<help) " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
-		bot.user.setUsername("Check your code at line 24 !");
+		bot.user.setUsername(process.env.bot_name);
 });
 
 bot.on('guildCreate', guild => {
-	hook.info("Xenohook", 'New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
+	hook.info(bot.user.tag, 'New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
 	console.log('New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
 	bbot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 });
 bot.on("guildDelete", guild => {
 	console.log('I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
-	hook.info("Xenohook", 'I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
+	hook.info(bot.user.tag, 'I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
 	bot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 });
 
@@ -221,12 +220,6 @@ if (message.content.startsWith(prefix + '8ball')) {
 		embed.addField("Channels", bot.channels.size)
 		embed.setFooter(bot.user.username, bot.user.avatarURL);
 		message.reply({embed})
-	}
-	if (message.content.startsWith(prefix + 'emotecord')) {
-		message.channel.send("EmoteCord : https://discord.gg/QCNzekJ do <support to have the support server")
-	}
-	if (message.content.startsWith(prefix + 'support')) {
-		message.channel.send("Support server : https://discord.gg/ExwXSWS do <emotecord to have emotecord server")
 	}
 	if (message.content.startsWith(prefix + 'frexcuse')) {
 			var maissuite = ['un zombie', 'le troll érudit', "l'un des gardiens", 'un rat mutant', 'l\'aubergiste', 'le bourreau ivre', 'un menestrel moche', 'un orque d\'élite', 'le sorcier stagiaire', 'un type suspect', 'le prisonnier barbu', 'l\'herboriste',  'le chien d\'un voisin', 'un garde de la ville', 'un colporteur', 'un aventurier', 'le plombier', 'l\'ingénieur gobelin', 'un vieux fou'];
