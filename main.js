@@ -26,7 +26,7 @@ bot.on('ready', () => {
 bot.on('guildCreate', guild => {
 	hook.info(bot.user.tag, 'New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
 	console.log('New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
-	bbot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
+	bot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 });
 bot.on("guildDelete", guild => {
 	console.log('I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
