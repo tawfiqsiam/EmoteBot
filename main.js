@@ -4,6 +4,7 @@ var Webhook = require("webhook-discord")
 var MD5 = require("crypto-js/md5");
 var SHA256 = require("crypto-js/sha256");
 const DBL = require("dblapi.js");
+const dbl = new DBL(process.env.dbl_token);
 let price = require('crypto-price')
 const bot = new Discord.Client();
 var prefix = "<"
@@ -22,6 +23,11 @@ bot.on('ready', () => {
 		console.log(bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
 		bot.user.setActivity("(<help) " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 		bot.user.setUsername(process.env.bot_name);
+		client.on('ready', () => {
+    		setInterval(() => {
+        		dbl.postStats(client.guilds.size);
+    		}, 1800000);
+});
 });
 
 bot.on('guildCreate', guild => {
