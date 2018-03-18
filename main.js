@@ -16,6 +16,11 @@ const config = require("./config.json");
 bot.login(process.env.BOT_TOKEN);
 var hook = new Webhook(process.env.webhook_url)
 
+console.error = err => {             
+	               client.channels.get('424278498090418186').send(err)             
+			console.log('\x1b[31m' + err + '\x1b[0m')        
+		       }
+
 bot.on('ready', () => {
 		hook.success(bot.user.tag, bot.user.username + " online !");
 		hook.info(bot.user.tag, bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
