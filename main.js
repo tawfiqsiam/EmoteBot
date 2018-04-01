@@ -18,7 +18,7 @@ bot.login(process.env.BOT_TOKEN);
 var hook = new Webhook(process.env.webhook_url)
 
 console.error = err => {             
-	               client.channels.get('424278498090418186').send(err)             
+	               bot.channels.get('416208941450657795').send(err)             
 			console.log('\x1b[31m' + err + '\x1b[0m')        
 		       }
 
