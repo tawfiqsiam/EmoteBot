@@ -1,19 +1,21 @@
 {
-  "name": "EmoteCord Bot fr",
+  "name": "EmoteBot-fr",
   "version": "6.6.6",
-  "description": "A bot",
+  "description": "Dev by Jus De Patate#0190 & Translated by Nooody#4137",
   "main": "main.js",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "crypto-price": "0.0.4",
-    "discord.js": "^11.2.1",
+    "discord.js": "^11.3.2",
+    "dblapi.js": "^1.2.0",
     "moment": "^2.20.1",
+    "request": "2.85.0", 
     "webhook-discord": "^2.0.6"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js"
   },
-  "author": "Xen & Nooody",
+  "author": "Xen",
   "license": "Apache 2"
 }
