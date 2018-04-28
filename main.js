@@ -8,12 +8,11 @@ const bot = new Discord.Client();
 var http = require('http');
 var prefix = "d!"
 var adminprefix = "da!"
-var OWNERID = "OWNER 1"
-var OWNERID2 = "OWNER 2"
-var OWNERID3 = "OWNER 3"
-const config = require("./config.json");
-bot.login(config.token);
-var hook = new Webhook("VOTRE DEBUT D'URL DE WEBHOOK" + config.hooktoken)
+var OWNERID = process.env.owner1
+var OWNERID2 = process.env.owner2
+var OWNERID3 = process.env.owner3
+bot.login(process.env.token);
+var hook = new Webhook(process.env.hooktoken)
 
 bot.on('ready', () => {
 		hook.success("Dishook", bot.user.username + " en ligne !");
@@ -21,7 +20,7 @@ bot.on('ready', () => {
 		console.log(bot.user.username + " en ligne !");
 		console.log(bot.users.size + " utilisateurs dans " + bot.channels.size + " channels de " + bot.guilds.size + " serveurs !");
 		bot.user.setActivity("(d!help) " + bot.users.size + " utilisateurs / " + bot.guilds.size + " serveurs !", { type: "WATCHING"});
-		bot.user.setUsername("Disbot");
+		bot.user.setUsername(process.env.username);
 });
 
 bot.on('guildCreate', guild => {
