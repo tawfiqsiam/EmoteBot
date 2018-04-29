@@ -140,7 +140,7 @@ if(message.content.startsWith(prefix + 'userinfo')) {
 					req({
 					url:"https://bots.discord.pw/api/bots/" + botid,
 					headers:{
-					   "Authorization":config.bdpwtoken
+					   "Authorization":process.env.bdpw
 					}}, (e, r, b) =>{
 						contenu = JSON.parse(b)
 						if(contenu.error === "Bot user ID not found")  {
