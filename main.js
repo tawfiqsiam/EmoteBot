@@ -345,7 +345,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 			})
 		}
 		if(message.content.startsWith(prefix + "cat")) {
-			req('http://random.cat/meow?filter=mp4,webm', (e, r, b)=> {
+			req('http://aws.random.cat/meow?filter=mp4,webm', (e, r, b)=> {
 				let contenu = JSON.parse(b)
 			const embed = new Discord.RichEmbed()
 				embed.setTitle("random.cat")
