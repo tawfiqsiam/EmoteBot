@@ -101,7 +101,7 @@ if(message.content.startsWith(prefix + 'userinfo')) {
 						embed.addField("Approved", contenu.approved === true ? "Yes ✅" : "No ❎")
 						embed.addField("Server count", contenu.count)
 						embed.addField("Lib used", contenu.lib)
-						embed.addField("Added on", moment(contenu.timestamp).format("D MMMM Y on LTS"))
+						embed.addField("Added on", moment(contenu.timestamp).format("D MMMM Y"))
 						embed.addField("Prefix", contenu.prefix)
 						embed.addField("Links", "[Invitation](" + contenu.invite + ")\n[DBL.fr](https://discordbots.fr/bots/" + botid + " )\n[Github](" + contenu.github + ")\n[Website](" + contenu.website + ")")
 						message.channel.send({embed});
@@ -786,4 +786,28 @@ if(message.content.startsWith(prefix + "mc")) {
 		message.channel.send("__Args list :__\n\n`status` : to get MC/Mojang api status\n`player` : to get info about a player\n`server` : to get info about a server")
 	}
 }
+	if(message.content.startsWith(prefix + "github")) {
+	let name = args[0]
+	req('https://api.github.com/users/' + name, (e, r, b)=> {
+		let contenu = JSON.parse(b)
+		if(contenu.message === "Not Found") {
+			message.channel.send("This user doesn´t exist")
+		} else {
+	const embed = new Discord.RichEmbed()
+		embed.setTitle("Github API")
+		embed.setAuthor(bot.user.username, bot.user.avatarURL)
+		embed.setColor(0x00AE86)
+		embed.setFooter(bot.user.username, bot.user.avatarURL);
+		embed.addField(contenu.login + " (" + contenu.type + ")", contenu.bio)
+		embed.addField(contenu.public_repos + " public repos", "[Check them](https://github.com/" + name + "?tab=repositories)")
+		embed.addField("Followers", contenu.followers)
+		embed.addField("Following", contenu.following)
+		embed.addField("Created on", moment(contenu.created_at).format("D MMMM Y"))
+		embed.addField("Links", "[Website](" + contenu.blog + ")\n[Github](https://github.com/" + name + ")")	
+		embed.setThumbnail(contenu.avatar_url)
+		embed.setTimestamp()
+		message.channel.send({embed});
+		}
+	})
+	}
 });
