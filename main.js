@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const moment = require('moment');
+var cities = require('cities');
 var Webhook = require("webhook-discord")
 var MD5 = require("crypto-js/md5");
 var SHA256 = require("crypto-js/sha256");
@@ -867,5 +868,25 @@ if(message.content.startsWith(prefix + "mc")) {
 	message.channel.send("This bot only supports Framagit (https://framagit.org) and GitLab (https://gitlab.com)\nDM \"Jus De Patate#0190\" if you own/know other GitLab instance that could be compatible")
 	}
        }
-       
+       if(message.content.startsWith(prefix + "iss") {
+	req('http://api.open-notify.org/iss-now.json', (e, r, b)=> {
+		let contenu = JSON.parse(b)
+		if(contenu.message != "success") {
+			message.channel.send("Error, please contact the owner (Jus De Patate#0190)")
+		} else {
+	const embed = new Discord.RichEmbed()
+		embed.setTitle("ISS Position")
+		embed.setAuthor(bot.user.username, bot.user.avatarURL)
+		embed.setColor(0x00AE86)
+		embed.setFooter(bot.user.username, bot.user.avatarURL);
+		embed.addField(ip, contenu.motd)
+		embed.addField(cities.gps_lookup(contenu.latitude, contenu.longitude).state + " (" + cities.gps_lookup(contenu.latitude, contenu.longitude).state_abbr + ")", cities.gps_lookup(contenu.latitude, contenu.longitude).city + " (" + cities.gps_lookup(contenu.latitude, contenu.longitude).zipcode + ")")
+		embed.addField("GPS Coords", "Long: " + contenu.longitude + "\nLat: " + contenu.latitude)
+		embed.setThumbnail("http://mcapi.de/api/image/favicon/" + ip)
+		embed.setTimestamp(contenu.timestamp)
+		message.channel.send({embed});
+		}
+	})
+	}
+	  }
 });
