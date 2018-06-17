@@ -813,6 +813,7 @@ if(message.content.startsWith(prefix + "mc")) {
 		}
 	})
 	}
+	
 		if(message.content.startsWith(prefix + "gitlab")) {
 	let inst = args[0]
 	let name = args[1]
@@ -834,9 +835,9 @@ if(message.content.startsWith(prefix + "mc")) {
 		embed.setThumbnail(contenu.avatar_url)
 		embed.setTimestamp()
 		message.channel.send({embed});
-		}
-	})
-}
+		
+	}
+})
 	} if(inst === "framagit" || inst === "framagit.org") {
 	req("https://framagit.org/api/v4/users?username=" + name + "&private-token=" + process.env.framagit, (e, r, b)=> {
 		let contenu = JSON.parse(b)
@@ -855,9 +856,9 @@ if(message.content.startsWith(prefix + "mc")) {
 		embed.setThumbnail(contenu.avatar_url)
 		embed.setTimestamp()
 		message.channel.send({embed});
-		}
-	})
-}
+		
+	}
+})
 	} if(!inst || !name){
 	message.channel.send("Missing one arg or more, this bot support Framagit and GitLab as first arg and a username as second arg")
 	} else {
