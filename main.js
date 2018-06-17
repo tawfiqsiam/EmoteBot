@@ -862,13 +862,13 @@ if(message.content.startsWith(prefix + "mc")) {
 		
 	}
 })
-	} if(!inst || !name){
+	} if(!inst || !name) {
 	message.channel.send("Missing one arg or more, this bot support Framagit and GitLab as first arg and a username as second arg")
 	} else {
 	message.channel.send("This bot only supports Framagit (https://framagit.org) and GitLab (https://gitlab.com)\nDM \"Jus De Patate#0190\" if you own/know other GitLab instance that could be compatible")
 	}
        }
-}
+})
        if(message.content.startsWith(prefix + "iss") {
 	req('http://api.open-notify.org/iss-now.json', (e, r, b)=> {
 		let contenu = JSON.parse(b)
