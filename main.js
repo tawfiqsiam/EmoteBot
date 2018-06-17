@@ -80,7 +80,7 @@ if(message.content.startsWith(prefix + 'userinfo')) {
 			message.channel.send({embed});
 		}
 		if(!member) {
-			console.log("noting")
+			console.log("nothing")
 		} else {
 		if(member.user.bot) {
 			if(argresult.startsWith("dbl.fr")) {
@@ -171,7 +171,7 @@ if (message.content.startsWith(adminprefix + 'membercount')) {
 		embed.setAuthor('EmoteCord Bot')
 		embed.setFooter(bot.user.username, bot.user.avatarURL);
 		embed.setColor(0x00AE86)
-		embed.setDescription('by Xen#0190')
+		embed.setDescription('by Jus De Patate#0190')
 		embed.setThumbnail('https://cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
 		embed.setTimestamp()
 		embed.addField('Membercount', `${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} (${message.guild.members.filter(m=>m.user.bot).size} bots)`, true)
@@ -202,7 +202,10 @@ if (message.content.startsWith(prefix + '8ball')) {
 					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
 					embed.addField('Crypto <:lock:405711204971970571>', "<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
 					embed.addField('Other Language <:flag_fr:409768694822993942>', '<frexcuse, donne une excuse Naheulbeukesque', true);
-					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.2/NodeJS 9.4.0', true);
+		                        embed.addField('Git <:git:457815596785074176>', '<gitlab [INSTANCE] [USER], give info about a GitLab user\n<github [USER/ORG], give info about a GitHub user/org', true);
+		                        
+		
+					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.2/NodeJS 9.4.0 and deployed using Heroku', true);
 				message.reply({embed});
 	}
 	if (message.content.startsWith(prefix + 'botinfo')) {
@@ -810,4 +813,56 @@ if(message.content.startsWith(prefix + "mc")) {
 		}
 	})
 	}
+		if(message.content.startsWith(prefix + "gitlab")) {
+	let inst = args[0]
+	let name = args[1]
+	if(inst === "gitlab" || inst === "gitlab.com") {
+	req('https://gitlab.com/api/v4/users?username=" + name + "&private-token=" + process.env.gitlabapi, (e, r, b)=> {
+		let contenu = JSON.parse(b)
+		if(!contenu.name) {
+			message.channel.send("This user doesn´t exist")
+		} else {
+	const embed = new Discord.RichEmbed()
+		embed.setTitle("Gitlab API (" + inst + ")")
+		embed.setAuthor(bot.user.username, bot.user.avatarURL)
+		embed.setColor(0x00AE86)
+		embed.setFooter(bot.user.name, bot.user.avatarURL);
+		embed.addField(contenu.name + " (" + contenu.username + ")", "ID " + contenu.id)
+		embed.addField("Active user ?", contenu.state === "active" ? "Yes ✅" : "No ❎")
+		embed.addField("Repos", "[Check them](https://gitlab.com/" + name + "/projects)")
+		embed.addField("Links", "[GitLab](" + contenu.web_url + ")")	
+		embed.setThumbnail(contenu.avatar_url)
+		embed.setTimestamp()
+		message.channel.send({embed});
+		}
+	})
+}
+	} if(inst === "framagit" || inst === "framagit.org") {
+	req('https://framagit.org/api/v4/users?username=" + name + "&private-token=" + process.env.framagit, (e, r, b)=> {
+		let contenu = JSON.parse(b)
+		if(!contenu.name) {
+			message.channel.send("This user doesn´t exist")
+		} else {
+	const embed = new Discord.RichEmbed()
+		embed.setTitle("Gitlab API (" + inst + ")")
+		embed.setAuthor(bot.user.username, bot.user.avatarURL)
+		embed.setColor(0x00AE86)
+		embed.setFooter(bot.user.name, bot.user.avatarURL);
+		embed.addField(contenu.name + " (" + contenu.username + ")", "ID " + contenu.id)
+		embed.addField("Active user ?", contenu.state === "active" ? "Yes ✅" : "No ❎")
+		embed.addField("Repos", "[Check them](https://framagit.org/" + name + "/projects)")
+		embed.addField("Links", "[GitLab](" + contenu.web_url + ")")	
+		embed.setThumbnail(contenu.avatar_url)
+		embed.setTimestamp()
+		message.channel.send({embed});
+		}
+	})
+}
+	} if(!inst || !name){
+	message.channel.send("Missing one arg or more, this bot support Framagit and GitLab as first arg and a username as second arg")
+	} else {
+	message.channel.send("This bot only supports Framagit (https://framagit.org) and GitLab (https://gitlab.com)\nDM \"Jus De Patate#0190\" if you own/know other GitLab instance that could be compatible")
+	}
+       }
+       
 });
