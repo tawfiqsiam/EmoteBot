@@ -838,7 +838,7 @@ if(message.content.startsWith(prefix + "mc")) {
 	})
 }
 	} if(inst === "framagit" || inst === "framagit.org") {
-	req('https://framagit.org/api/v4/users?username=" + name + "&private-token=" + process.env.framagit, (e, r, b)=> {
+	req("https://framagit.org/api/v4/users?username=" + name + "&private-token=" + process.env.framagit, (e, r, b)=> {
 		let contenu = JSON.parse(b)
 		if(!contenu.name) {
 			message.channel.send("This user doesn´t exist")
