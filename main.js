@@ -797,7 +797,7 @@ if(message.content.startsWith(prefix + "mc")) {
 		if(contenu.message === "Not Found") {
 			message.channel.send("This user doesn´t exist")
 		} if (!name) {
-			message.channel.send("Please provide a user/org name)
+			message.channel.send("Please provide a user/org name")
 		} else {
 	const embed = new Discord.RichEmbed()
 		embed.setTitle("Github API")
