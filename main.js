@@ -868,6 +868,7 @@ if(message.content.startsWith(prefix + "mc")) {
 	message.channel.send("This bot only supports Framagit (https://framagit.org) and GitLab (https://gitlab.com)\nDM \"Jus De Patate#0190\" if you own/know other GitLab instance that could be compatible")
 	}
        }
+}
        if(message.content.startsWith(prefix + "iss") {
 	req('http://api.open-notify.org/iss-now.json', (e, r, b)=> {
 		let contenu = JSON.parse(b)
@@ -882,11 +883,11 @@ if(message.content.startsWith(prefix + "mc")) {
 		embed.addField(ip, contenu.motd)
 		embed.addField(cities.gps_lookup(contenu.latitude, contenu.longitude).state + " (" + cities.gps_lookup(contenu.latitude, contenu.longitude).state_abbr + ")", cities.gps_lookup(contenu.latitude, contenu.longitude).city + " (" + cities.gps_lookup(contenu.latitude, contenu.longitude).zipcode + ")")
 		embed.addField("GPS Coords", "Long: " + contenu.longitude + "\nLat: " + contenu.latitude)
-		embed.setThumbnail("http://mcapi.de/api/image/favicon/" + ip)
+		embed.setThumbnail("http://sciencepost.fr/wp-content/uploads/2017/11/715-iss-bacteria_1024-758x307.jpg")
 		embed.setTimestamp(contenu.timestamp)
 		message.channel.send({embed});
 		}
 	})
-	}
+	
 	  }
 });
