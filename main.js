@@ -817,7 +817,7 @@ if(message.content.startsWith(prefix + "mc")) {
 	let inst = args[0]
 	let name = args[1]
 	if(inst === "gitlab" || inst === "gitlab.com") {
-	req('https://gitlab.com/api/v4/users?username=" + name + "&private-token=" + process.env.gitlabapi, (e, r, b)=> {
+	req("https://gitlab.com/api/v4/users?username=" + name + "&private-token=" + process.env.gitlabapi, (e, r, b)=> {
 		let contenu = JSON.parse(b)
 		if(!contenu.name) {
 			message.channel.send("This user doesn´t exist")
