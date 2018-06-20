@@ -882,7 +882,6 @@ if(message.content.startsWith(prefix + "mc")) {
 		embed.addField(cities.gps_lookup(contenu.iss_position.latitude, contenu.iss_position.longitude).state + " (" + cities.gps_lookup(contenu.iss_position.latitude, contenu.iss_position.longitude).state_abbr + ")", cities.gps_lookup(contenu.iss_position.latitude, contenu.iss_position.longitude).city + " (" + cities.gps_lookup(contenu.iss_position.latitude, contenu.iss_position.longitude).zipcode + ")")
 		embed.addField("GPS Coords", "Long: " + contenu.iss_position.longitude + "\nLat: " + contenu.iss_position.latitude)
 		embed.setThumbnail("http://sciencepost.fr/wp-content/uploads/2017/11/715-iss-bacteria_1024-758x307.jpg")
-		embed.setFooter("Updated on " + moment(contenu.timestamp).format("D MMMM Y"));
 		embed.setTimestamp()
 		message.channel.send({embed});
 		}
