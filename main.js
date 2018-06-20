@@ -196,7 +196,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 					embed.setFooter(bot.user.username, bot.user.avatarURL);
 					embed.setImage('https://i.imgur.com/lHU6JcZ.png')
 					embed.setTimestamp()
-					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command\n<dog, random dog\n<cat, random cat\n<dawae, do you know da wae ?\n<facepalm, facepalm\n<hug, hug someone !\n<nut, kick in the nut\n<kiss, kiss someone\nslap, slap someone')
+					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command\n<dog, random dog\n<cat, random cat\n<dawae, do you know da wae ?\n<facepalm, facepalm\n<hug, hug someone !\n<nut, kick in the nut\n<kiss, kiss someone\n<slap, slap someone')
 					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)\n<iss, give place of the ISS\n<mc [SERVER/PLAYER/STATUS], give about a server/player of the status', true)
 					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
 					embed.addField('Money ', '<btc, give btc price\n<eth, give eth price\n<xmr, give xmr price\n<crypto, give price of 3 cryptocurrencies', true);
@@ -326,7 +326,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,XMR&tsyms=USD,EUR', (e, r, b)=> {
 				let contenu = JSON.parse(b)
 			const embed = new Discord.RichEmbed()
-				embed.setTitle("XMR Price")
+				embed.setTitle("BRC/ETH/XMR Price")
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
