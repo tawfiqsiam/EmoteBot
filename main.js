@@ -868,9 +868,8 @@ if(message.content.startsWith(prefix + "mc")) {
 	message.channel.send("This bot only supports Framagit (https://framagit.org) and GitLab (https://gitlab.com)\nDM \"Jus De Patate#0190\" if you own/know other GitLab instance that could be compatible")
 	}
        }
-}
-       if(message.content.startsWith(prefix + "iss") {
-	req('http://api.open-notify.org/iss-now.json', (e, r, b)=> {
+       if(message.content.startsWith(prefix + "iss")) {
+       req('http://api.open-notify.org/iss-now.json', (e, r, b)=> {
 		let contenu = JSON.parse(b)
 		if(contenu.message != "success") {
 			message.channel.send("Error, please contact the owner (Jus De Patate#0190)")
@@ -887,7 +886,6 @@ if(message.content.startsWith(prefix + "mc")) {
 		embed.setTimestamp(contenu.timestamp)
 		message.channel.send({embed});
 		}
-	})
-	
-	  }
+    })
+}
 });
