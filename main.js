@@ -196,17 +196,15 @@ if (message.content.startsWith(prefix + '8ball')) {
 					embed.setDescription('by Jus De Patate#0190')
 					embed.setFooter(bot.user.username, bot.user.avatarURL);
 					embed.setImage('https://i.imgur.com/lHU6JcZ.png')
-					embed.setThumbnail('https://images-ext-1.discordapp.net/external/pE4AtAycH79mPYD5rK1f5BozWKnNSyqiPcqIBzkPpxc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/196668513601978369/1c30c546addb15d82e15523b306c955c.jpg?width=250&height=250')
 					embed.setTimestamp()
 					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command\n<dog, random dog\n<cat, random cat\n<dawae, do you know da wae ?\n<facepalm, facepalm\n<hug, hug someone !\n<nut, kick in the nut\n<kiss, kiss someone\nslap, slap someone')
-					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<emotecord, give an invite for EmoteCord\n<support, get an invite to the support server\n<userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)', true)
+					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)\n<iss, give place of the ISS\n<mc [SERVER/PLAYER/STATUS], give about a server/player of the status', true)
 					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
+					embed.addField('Money ', '<btc, give btc price\n<eth, give eth price\n<xmr, give xmr price\n<crypto, give price of 3 cryptocurrencies', true);
 					embed.addField('Crypto <:lock:405711204971970571>', "<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
 					embed.addField('Other Language <:flag_fr:409768694822993942>', '<frexcuse, donne une excuse Naheulbeukesque', true);
-		                        embed.addField('Git <:git:457815596785074176>', '<gitlab [INSTANCE] [USER], give info about a GitLab user\n<github [USER/ORG], give info about a GitHub user/org', true);
-		                        
-		
-					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js 11.2/NodeJS 9.4.0 and deployed using Heroku', true);
+		                        embed.addField('Git <:git:457815596785074176>', '<github [USER/ORG], give info about a GitHub user/org', true);
+					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js and deployed using Heroku', true);
 				message.reply({embed});
 	}
 	if (message.content.startsWith(prefix + 'botinfo')) {
@@ -284,41 +282,58 @@ if (message.content.startsWith(prefix + '8ball')) {
 			message.reply("Here it is : " + SHA256(argresult));
 		}
 		if (message.content.startsWith(prefix + "eth")) {
-		price.getCryptoPrice("EUR", "ETH").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
-			message.reply("1 ETH = " + obj.price + "€")
-		}).catch(err => {
-			hook.error("Xenohook", err)
-		})
-		price.getCryptoPrice("USD", "ETH").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
-			message.reply("1 ETH = " + obj.price + "$")
-		}).catch(err => {
-			hook.error("Xenohook", err)
-		})
-		}
+			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH&tsyms=USD,EUR', (e, r, b)=> {
+				let contenu = JSON.parse(b)
+			const embed = new Discord.RichEmbed()
+				embed.setTitle("ETH Price")
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+			        embed.addField("Dollar", contenu.eth.usd + " $")
+			        embed.addField("Euro", contenu.eth.eur + " €")
+				embed.setTimestamp()
+				message.channel.send({embed});
+			})
 		if (message.content.startsWith(prefix + "btc")) {
-			price.getCryptoPrice("EUR", "BTC").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
-				message.reply("1 BTC = " + obj.price + "€")
-			}).catch(err => {
-				hook.error("Xenohook", err)
+			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD,EUR', (e, r, b)=> {
+				let contenu = JSON.parse(b)
+			const embed = new Discord.RichEmbed()
+				embed.setTitle("BTC Price")
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+			        embed.addField("Dollar", contenu.btc.usd + " $")
+			        embed.addField("Euro", contenu.btc.eur + " €")
+				embed.setTimestamp()
+				message.channel.send({embed});
 			})
-			price.getCryptoPrice("USD", "BTC").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
-				message.reply("1 BTC = " + obj.price + "$")
-			}).catch(err => {
-				hook.error("Xenohook", err)
-			})
-		}
 		if (message.content.startsWith(prefix + "xmr")) {
-			price.getCryptoPrice("EUR", "XMR").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
-				message.reply("1 XMR = " + obj.price + "€")
-			}).catch(err => {
-				hook.error("Xenohook", err)
+			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=XMR&tsyms=USD,EUR', (e, r, b)=> {
+				let contenu = JSON.parse(b)
+			const embed = new Discord.RichEmbed()
+				embed.setTitle("XMR Price")
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+			        embed.addField("Dollar", contenu.xmr.usd + " $")
+			        embed.addField("Euro", contenu.xmr.eur + " €")
+				embed.setTimestamp()
+				message.channel.send({embed});
 			})
-			price.getCryptoPrice("USD", "XMR").then(obj => { // Base for ex - USD, Crypto for ex - ETH  
-				message.reply("1 XMR = " + obj.price + "$")
-			}).catch(err => {
-				hook.error("Xenohook", err)
+			if (message.content.startsWith(prefix + "crypto")) {
+			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,XMR&tsyms=USD,EUR', (e, r, b)=> {
+				let contenu = JSON.parse(b)
+			const embed = new Discord.RichEmbed()
+				embed.setTitle("XMR Price")
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+			        embed.addField("BTC", contenu.btc.usd + " $ / " + contenu.btc.eur + " €")
+			        embed.addField("ETH", contenu.eth.usd + " $ / " + contenu.eth.eur + " €")
+				embed.addField("XMR", contenu.xmr.usd + " $ / " + contenu.xmr.eur + " €")
+				embed.setTimestamp()
+				message.channel.send({embed});
 			})
-		}
 		if (message.content.startsWith(prefix + "serverinfo")) {
 			const embed = new Discord.RichEmbed()
 			.setAuthor(message.guild.name, message.guild.iconURL)
@@ -716,19 +731,7 @@ function GTNh(message){
 	}})
 }
 }
-if(message.content.startsWith(prefix + "emoji")) {
-	if (!args) {
-		message.channel.createMessage('Specify an emoji!');
-	}
-	else {
-	const embed = new Discord.RichEmbed()
-	embed.setTitle(`Emoji`)
-	embed.setDescription("Here is the emoji I founded!")
-	embed.setImage("https://discordemoji.com/assets/emoji/" + argresult + ".png")
-	embed.setFooter("Based on discordemoji.com")
-	message.channel.send({embed})
-	}
-}
+
 if(message.content.startsWith(prefix + "mc")) {
 	let typeapi = args[0]
 	let ip = args[1]
@@ -817,57 +820,6 @@ if(message.content.startsWith(prefix + "mc")) {
 	})
 	}
 	
-		if(message.content.startsWith(prefix + "gitlab")) {
-	let inst = args[0]
-	let name = args[1]
-	if(inst === "gitlab" || inst === "gitlab.com") {
-	req("https://gitlab.com/api/v4/users?username=" + name + "&private-token=" + process.env.gitlabapi, (e, r, b)=> {
-		let contenu = JSON.parse(b)
-		if(!contenu.name) {
-			message.channel.send("This user doesn´t exist")
-		} else {
-	const embed = new Discord.RichEmbed()
-		embed.setTitle("Gitlab API (" + inst + ")")
-		embed.setAuthor(bot.user.username, bot.user.avatarURL)
-		embed.setColor(0x00AE86)
-		embed.setFooter(bot.user.name, bot.user.avatarURL);
-		embed.addField(contenu.name + " (" + contenu.username + ")", "ID " + contenu.id)
-		embed.addField("Active user ?", contenu.state === "active" ? "Yes ✅" : "No ❎")
-		embed.addField("Repos", "[Check them](https://gitlab.com/" + name + "/projects)")
-		embed.addField("Links", "[GitLab](" + contenu.web_url + ")")	
-		embed.setThumbnail(contenu.avatar_url)
-		embed.setTimestamp()
-		message.channel.send({embed});
-		
-	}
-})
-	} if(inst === "framagit" || inst === "framagit.org") {
-	req("https://framagit.org/api/v4/users?username=" + name + "&private-token=" + process.env.framagit, (e, r, b)=> {
-		let contenu = JSON.parse(b)
-		if(!contenu.name) {
-			message.channel.send("This user doesn´t exist")
-		} else {
-	const embed = new Discord.RichEmbed()
-		embed.setTitle("Gitlab API (" + inst + ")")
-		embed.setAuthor(bot.user.username, bot.user.avatarURL)
-		embed.setColor(0x00AE86)
-		embed.setFooter(bot.user.name, bot.user.avatarURL);
-		embed.addField(contenu.name + " (" + contenu.username + ")", "ID " + contenu.id)
-		embed.addField("Active user ?", contenu.state === "active" ? "Yes ✅" : "No ❎")
-		embed.addField("Repos", "[Check them](https://framagit.org/" + name + "/projects)")
-		embed.addField("Links", "[GitLab](" + contenu.web_url + ")")	
-		embed.setThumbnail(contenu.avatar_url)
-		embed.setTimestamp()
-		message.channel.send({embed});
-		
-	}
-})
-	} if(!inst || !name) {
-	message.channel.send("Missing one arg or more, this bot support Framagit and GitLab as first arg and a username as second arg")
-	} else {
-	message.channel.send("This bot only supports Framagit (https://framagit.org) and GitLab (https://gitlab.com)\nDM \"Jus De Patate#0190\" if you own/know other GitLab instance that could be compatible")
-	}
-       }
        if(message.content.startsWith(prefix + "iss")) {
        req('http://api.open-notify.org/iss-now.json', (e, r, b)=> {
 		let contenu = JSON.parse(b)
