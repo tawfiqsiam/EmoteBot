@@ -879,7 +879,6 @@ if(message.content.startsWith(prefix + "mc")) {
 		embed.setAuthor(bot.user.username, bot.user.avatarURL)
 		embed.setColor(0x00AE86)
 		embed.setFooter(bot.user.username, bot.user.avatarURL);
-		embed.addField(ip, contenu.motd)
 		embed.addField(cities.gps_lookup(contenu.latitude, contenu.longitude).state + " (" + cities.gps_lookup(contenu.latitude, contenu.longitude).state_abbr + ")", cities.gps_lookup(contenu.latitude, contenu.longitude).city + " (" + cities.gps_lookup(contenu.latitude, contenu.longitude).zipcode + ")")
 		embed.addField("GPS Coords", "Long: " + contenu.longitude + "\nLat: " + contenu.latitude)
 		embed.setThumbnail("http://sciencepost.fr/wp-content/uploads/2017/11/715-iss-bacteria_1024-758x307.jpg")
