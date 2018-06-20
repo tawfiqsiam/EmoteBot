@@ -6,7 +6,6 @@ var MD5 = require("crypto-js/md5");
 var SHA256 = require("crypto-js/sha256");
 const DBL = require("dblapi.js");
 const dbl = new DBL(process.env.dbl_token);
-let price = require('crypto-price')
 var req = require("request")
 const bot = new Discord.Client();
 var prefix = "<"
@@ -294,6 +293,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
+		}
 		if (message.content.startsWith(prefix + "btc")) {
 			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD,EUR', (e, r, b)=> {
 				let contenu = JSON.parse(b)
@@ -307,6 +307,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
+		}
 		if (message.content.startsWith(prefix + "xmr")) {
 			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=XMR&tsyms=USD,EUR', (e, r, b)=> {
 				let contenu = JSON.parse(b)
@@ -320,6 +321,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
+		}
 			if (message.content.startsWith(prefix + "crypto")) {
 			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,XMR&tsyms=USD,EUR', (e, r, b)=> {
 				let contenu = JSON.parse(b)
@@ -334,6 +336,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
+			}
 		if (message.content.startsWith(prefix + "serverinfo")) {
 			const embed = new Discord.RichEmbed()
 			.setAuthor(message.guild.name, message.guild.iconURL)
