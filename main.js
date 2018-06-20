@@ -288,8 +288,8 @@ if (message.content.startsWith(prefix + '8ball')) {
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
-			        embed.addField("Dollar", contenu.eth.usd + " $")
-			        embed.addField("Euro", contenu.eth.eur + " €")
+			        embed.addField("Dollar", contenu.ETH.USD + " $")
+			        embed.addField("Euro", contenu.ETH.EUR + " €")
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
@@ -302,8 +302,8 @@ if (message.content.startsWith(prefix + '8ball')) {
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
-			        embed.addField("Dollar", contenu.btc.usd + " $")
-			        embed.addField("Euro", contenu.btc.eur + " €")
+			        embed.addField("Dollar", contenu.BTC.USD + " $")
+			        embed.addField("Euro", contenu.BTC.EUR + " €")
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
@@ -316,8 +316,8 @@ if (message.content.startsWith(prefix + '8ball')) {
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
-			        embed.addField("Dollar", contenu.xmr.usd + " $")
-			        embed.addField("Euro", contenu.xmr.eur + " €")
+			        embed.addField("Dollar", contenu.XMR.USD + " $")
+			        embed.addField("Euro", contenu.XMR.EUR + " €")
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
@@ -330,9 +330,9 @@ if (message.content.startsWith(prefix + '8ball')) {
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
-			        embed.addField("BTC", contenu.btc.usd + " $ / " + contenu.btc.eur + " €")
-			        embed.addField("ETH", contenu.eth.usd + " $ / " + contenu.eth.eur + " €")
-				embed.addField("XMR", contenu.xmr.usd + " $ / " + contenu.xmr.eur + " €")
+			        embed.addField("BTC", contenu.BTC.USD + " $ / " + contenu.BTC.EUR + " €")
+			        embed.addField("ETH", contenu.ETH.USD + " $ / " + contenu.ETH.EUR + " €")
+				embed.addField("XMR", contenu.XMR.USD + " $ / " + contenu.XMR.EUR + " €")
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
