@@ -91,14 +91,14 @@ if(message.content.startsWith(prefix + 'userinfo')) {
 							message.channel.send("Not a bot, or not listed (or not approved by mods)");
 						} else {
 					const embed = new Discord.RichEmbed()
-						embed.setTitle(contenu.name)
+						embed.setTitle("<:dblfr:416211618192424971> " + contenu.name)
 						embed.setAuthor(bot.user.username, bot.user.avatarURL)
 						embed.setColor(0x00AE86)
 						embed.setFooter(bot.user.username, bot.user.avatarURL);
 						embed.setImage(contenu.avatar)
 						embed.setTimestamp()
 						embed.addField(contenu.name, contenu.shortDesc)
-						embed.addField("Approved", contenu.approved === true ? "Yes ✅" : "No ❎")
+						embed.addField("Approved", contenu.approved === true ? "Yes <:certified:416209894245531648>" : "No ❎")
 						embed.addField("Server count", contenu.count)
 						embed.addField("Lib used", contenu.lib)
 						embed.addField("Added on", moment(contenu.timestamp).format("D MMMM Y"))
@@ -117,14 +117,14 @@ if(message.content.startsWith(prefix + 'userinfo')) {
 						message.channel.send("Not a bot, or not listed (or not approved by mods)");
 					} else {
 					const embed = new Discord.RichEmbed()
-						embed.setTitle(contenu.username)
+						embed.setTitle("<:dblorg:416210448732651520> " + contenu.username)
 						embed.setAuthor(bot.user.username, bot.user.avatarURL)
 						embed.setColor(0x00AE86)
 						embed.setFooter(bot.user.username, bot.user.avatarURL);
 						embed.setImage('https://i.imgur.com/lHU6JcZ.png')
 						embed.setTimestamp()
 						embed.addField(contenu.username, contenu.shortdesc)
-						embed.addField("Certified ?", contenu.certifiedBot === true ? "Yes ✅" : "No ❎")
+						embed.addField("Certified ?", contenu.certifiedBot === true ? "Yes <:certified:416209894245531648>" : "No ❎")
 						embed.addField("Server count", contenu.server_count)
 						embed.addField("Lib used", contenu.lib)
 						embed.addField("Added on", contenu.date)
@@ -147,7 +147,7 @@ if(message.content.startsWith(prefix + 'userinfo')) {
 							message.channel.send("Not a bot, or not listed (or not approved by mods)");
 						} else {
 						const embed = new Discord.RichEmbed()
-							embed.setTitle(contenu.name)
+							embed.setTitle("<:bdpw:416211906186051595> " + contenu.name)
 							embed.setAuthor(bot.user.username, bot.user.avatarURL)
 							embed.setColor(0x00AE86)
 							embed.setFooter(bot.user.username, bot.user.avatarURL);
@@ -199,7 +199,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command\n<dog, random dog\n<cat, random cat\n<dawae, do you know da wae ?\n<facepalm, facepalm\n<hug, hug someone !\n<nut, kick in the nut\n<kiss, kiss someone\n<slap, slap someone')
 					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)\n<iss, give place of the ISS\n<mc [SERVER/PLAYER/STATUS], give about a server/player of the status', true)
 					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
-					embed.addField('Money ', '<btc, give btc price\n<eth, give eth price\n<xmr, give xmr price\n<crypto, give price of 3 cryptocurrencies', true);
+					embed.addField('Money <:moneybag:459278625099874314>', '<btc, give btc price\n<eth, give eth price\n<xmr, give xmr price\n<crypto, give price of 3 cryptocurrencies', true);
 					embed.addField('Crypto <:lock:405711204971970571>', "<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
 					embed.addField('Other Language <:flag_fr:409768694822993942>', '<frexcuse, donne une excuse Naheulbeukesque', true);
 		                        embed.addField('Git <:git:457815596785074176>', '<github [USER/ORG], give info about a GitHub user/org', true);
@@ -254,7 +254,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 	  // Now, time for a swift kick in the nuts!
 	     member.kick(reason)
 		.catch(error => message.reply(`Sorry ${message.author} I cannot kick because : ${error}`));
-  message.reply(`${member.user.tag} was kick by ${message.author.tag} because : ${reason}`);
+  message.reply(`<:BlobSalute:459278193665376257> ${member.user.tag} was kick by ${message.author.tag} because : ${reason}`);
 }
 	if (message.content.startsWith(prefix + 'ban')) {
 		if(!message.member.hasPermission('BAN_MEMBERS'))
@@ -262,9 +262,9 @@ if (message.content.startsWith(prefix + '8ball')) {
 	  
 	  let member = message.mentions.members.first();
 	  if(!member)
-	  return message.reply("Undifined person");
+	  return message.reply("Undefined person");
 	  if(!member.bannable) 
-	  return message.reply("i can't ban !");
+	  return message.reply("I can't ban !");
   
 	  let reason = args.slice(1).join(' ');
 	  if(!reason)
@@ -272,7 +272,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 	  
 	  member.ban(reason)
 	  .catch(error => message.reply(`Sorry ${message.author} I cannot ban because : ${error}`));
-	  message.reply(`${member.user.tag} was ban by ${message.author.tag} because : ${reason}`);
+	  message.reply(`<:BlobSaluteBan:459277735999569930> ${member.user.tag} was ban by ${message.author.tag} because : ${reason}`);
 	}
 		if (message.content.startsWith(prefix + 'md5')) {
 			message.reply("Here it is : " + MD5(argresult));
@@ -284,7 +284,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH&tsyms=USD,EUR', (e, r, b)=> {
 				let contenu = JSON.parse(b)
 			const embed = new Discord.RichEmbed()
-				embed.setTitle("ETH Price")
+				embed.setTitle("<:eth:459276613071405057>")
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
@@ -298,7 +298,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD,EUR', (e, r, b)=> {
 				let contenu = JSON.parse(b)
 			const embed = new Discord.RichEmbed()
-				embed.setTitle("BTC Price")
+				embed.setTitle("<:btc:459276391834451979>")
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
@@ -312,7 +312,7 @@ if (message.content.startsWith(prefix + '8ball')) {
 			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=XMR&tsyms=USD,EUR', (e, r, b)=> {
 				let contenu = JSON.parse(b)
 			const embed = new Discord.RichEmbed()
-				embed.setTitle("XMR Price")
+				embed.setTitle("<:xmr:459276939178410005>")
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
@@ -326,13 +326,13 @@ if (message.content.startsWith(prefix + '8ball')) {
 			req('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,XMR&tsyms=USD,EUR', (e, r, b)=> {
 				let contenu = JSON.parse(b)
 			const embed = new Discord.RichEmbed()
-				embed.setTitle("BRC/ETH/XMR Price")
+				embed.setTitle("<:btc:459276391834451979>/<:eth:459276613071405057>/<:xmr:459276939178410005>")
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
 				embed.setFooter(bot.user.username, bot.user.avatarURL);
-			        embed.addField("BTC", contenu.BTC.USD + " $ / " + contenu.BTC.EUR + " €")
-			        embed.addField("ETH", contenu.ETH.USD + " $ / " + contenu.ETH.EUR + " €")
-				embed.addField("XMR", contenu.XMR.USD + " $ / " + contenu.XMR.EUR + " €")
+			        embed.addField("<:btc:459276391834451979>", contenu.BTC.USD + " $ / " + contenu.BTC.EUR + " €")
+			        embed.addField("<:eth:459276613071405057>", contenu.ETH.USD + " $ / " + contenu.ETH.EUR + " €")
+				embed.addField("<:xmr:459276939178410005>", contenu.XMR.USD + " $ / " + contenu.XMR.EUR + " €")
 				embed.setTimestamp()
 				message.channel.send({embed});
 			})
@@ -521,10 +521,10 @@ if (message.content.startsWith(prefix + '8ball')) {
 			else if(arg.replace(" ","").toLowerCase()=="green") color=0x00FF00;
 			else if(arg.replace(" ","").toLowerCase()=="yellow") color=0xFFFF00;
 			else if(arg.replace(" ","").toLowerCase()=="violet") color=0xA000A0;
-			else if(arg.replace(" ","").toLowerCase()=="rose") color=0xFF00FF;
+			else if(arg.replace(" ","").toLowerCase()=="pink") color=0xFF00FF;
 			else if(arg.replace(" ","").toLowerCase()=="orange") color=0xFF3000;
-			else if(arg.replace(" ","").toLowerCase()=="noire") color=0x010000;
-			else if(arg.replace(" ","").toLowerCase()=="blanc") color=0xFFFFFF;
+			else if(arg.replace(" ","").toLowerCase()=="black") color=0x010000;
+			else if(arg.replace(" ","").toLowerCase()=="white") color=0xFFFFFF;
 			else if(arg.replace(" ","").toLowerCase()=="cyan") color=0x00FFFF;
 		}else if(args[i].replace(/ /g,'').replace(/\n/g,'').toLowerCase().startsWith('image:')){
 			arg = args[i].split(' ');
@@ -650,7 +650,7 @@ function GTNs(message){
 }
 function gtntimeout(message, game){
 	return setTimeout(()=>{
-		if(game.chances == 1) return GTNgo(message.channel, "Tardé.");
+		if(game.chances == 1) return GTNgo(message.channel, "Too late.");
 		message.channel.send("You left time!\n-1 try !");
 		game.chances=game.chances-1;
 		game.createdAt=message.createdTimestamp;
@@ -746,7 +746,7 @@ if(message.content.startsWith(prefix + "mc")) {
 			message.channel.send("Invalid hostname (i use only port `25565`) or offline")
 		} else {
 	const embed = new Discord.RichEmbed()
-		embed.setTitle("mcapi.us")
+		embed.setTitle("<:minecraft:416218262196584449>")
 		embed.setAuthor(bot.user.username, bot.user.avatarURL)
 		embed.setColor(0x00AE86)
 		embed.setFooter(bot.user.username, bot.user.avatarURL);
@@ -766,7 +766,7 @@ if(message.content.startsWith(prefix + "mc")) {
 				message.channel.send("Invalid user or not premium")
 			} else {
 		const embed = new Discord.RichEmbed()
-			embed.setTitle("mcapi.de")
+			embed.setTitle("<:minecraft:416218262196584449>")
 			embed.setAuthor(bot.user.username, bot.user.avatarURL)
 			embed.setColor(0x00AE86)
 			embed.setFooter("Updated on " + contenu.updated.time + " (tz " + contenu.updated.zone + ")");
@@ -783,7 +783,7 @@ if(message.content.startsWith(prefix + "mc")) {
 		req('http://mcapi.de/api/game/status/api.mojang.com', (e, r, b)=> {
 			let contenu = JSON.parse(b)
 		const embed = new Discord.RichEmbed()
-			embed.setTitle("mcapi.de")
+			embed.setTitle("<:mojang:416218990222901268>")
 			embed.setAuthor(bot.user.username, bot.user.avatarURL)
 			embed.setColor(0x00AE86)
 			embed.setFooter("Updated on " + contenu.updated.time + " (tz " + contenu.updated.zone + ")");
@@ -837,6 +837,24 @@ if(message.content.startsWith(prefix + "mc")) {
 		embed.addField(cities.gps_lookup(contenu.iss_position.latitude, contenu.iss_position.longitude).state + " (" + cities.gps_lookup(contenu.iss_position.latitude, contenu.iss_position.longitude).state_abbr + ")", cities.gps_lookup(contenu.iss_position.latitude, contenu.iss_position.longitude).city + " (" + cities.gps_lookup(contenu.iss_position.latitude, contenu.iss_position.longitude).zipcode + ")")
 		embed.addField("GPS Coords", "Long: " + contenu.iss_position.longitude + "\nLat: " + contenu.iss_position.latitude)
 		embed.setThumbnail("http://sciencepost.fr/wp-content/uploads/2017/11/715-iss-bacteria_1024-758x307.jpg")
+		embed.setTimestamp()
+		message.channel.send({embed});
+		}
+    })
+}
+	if(message.content.startsWith(prefix + "ts")) {
+		let ip = args[0]
+       req('https://api.planetteamspeak.com/serverstatus/' +ip, (e, r, b)=> {
+		let contenu = JSON.parse(b)
+		if(contenu.message != "success") {
+			message.channel.send("Error, invalid ip/port or server down")
+		} else {
+	const embed = new Discord.RichEmbed()
+		embed.setTitle("<:teamspeak:416545486607089676>")
+		embed.setAuthor(bot.user.username, bot.user.avatarURL)
+		embed.setColor(0x00AE86)
+		embed.setFooter(bot.user.username, bot.user.avatarURL);
+		embed.addField(contenu.result.name + " (" + ip + ")", contenu.result.users + "/" + contenu.result.slots)
 		embed.setTimestamp()
 		message.channel.send({embed});
 		}
