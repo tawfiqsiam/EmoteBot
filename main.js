@@ -15,6 +15,9 @@ var OWNERID2 = process.env.owner2
 var OWNERID3 = process.env.owner3
 bot.login(process.env.BOT_TOKEN);
 var hook = new Webhook(process.env.webhook_url)
+var Cleverbot = require('cleverbot-node');
+cleverbot = new Cleverbot;
+cleverbot.configure({botapi: process.env.cleverapi});
 
 console.error = err => {             
 	               bot.channels.get('416208941450657795').send(err)             
@@ -46,9 +49,25 @@ bot.on("guildDelete", guild => {
 
 bot.on('message', message => {
 	if (message.author.bot) return;
+	let firstword = message.content.split(' ').slice(0);
 	let args = message.content.split(' ').slice(1);
 	var argresult = args.join(' ');
-
+	
+if(message.content.startsWith(prefix + "clever")) {
+dbl.hasVoted(message.author.id).then(voted => {
+    if (voted) {
+cleverbot.write(message.content - firstword, (response) => {
+      message.channel.startTyping();
+      setTimeout(() => {
+        message.channel.send(response.output).catch(console.error);
+        message.channel.stopTyping();
+      }, Math.random() * (1 - 3) + 1 * 1000);
+    });	    
+    } else {
+     message.channel.send("Please upvote the bot here https://discordbots.org/bot/397007011549675521/vote");
+    }
+});
+}
 	if(message.content.startsWith(prefix+'ping')) {
 		message.react('🏓')
 		message.channel.send(`:ping_pong: \`${Date.now() - message.createdTimestamp} ms\``);
