@@ -54,7 +54,7 @@ bot.on('message', message => {
 	var argresult = args.join(' ');
 	
 if(message.content.startsWith(prefix + "clever")) {
-dbl.hasVoted(message.author.user.id).then(voted => {
+dbl.hasVoted(message.author.id).then(voted => {
     if (voted) {
 cleverbot.write(message.content - firstword, (response) => {
       message.channel.startTyping();
@@ -184,7 +184,6 @@ if(message.content.startsWith(prefix + 'userinfo')) {
 				}
 			}
 if (message.content.startsWith(adminprefix + 'membercount')) {
-	if(message.author.id != OWNERID) return;
 	const embed = new Discord.RichEmbed()
 		embed.setTitle('Membercount')
 		embed.setAuthor('EmoteCord Bot')
