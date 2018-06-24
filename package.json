@@ -11,11 +11,13 @@
     "moment": "^2.20.1",
     "request": "2.85.0", 
     "webhook-discord": "^2.0.6",
-    "cities": "^1.1.2"
+    "cities": "^1.1.2",
+    "cleverbot-node": "0.3.11"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "update": "git pull origin master"
   },
   "author": "Xen",
   "license": "Apache 2"
