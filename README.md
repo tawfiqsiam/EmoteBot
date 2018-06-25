@@ -20,6 +20,7 @@
 # Invite the bot : https://discordapp.com/oauth2/authorize?client_id=397007011549675521&scope=bot&permissions=-1
 
 [![Discord Bots](https://discordbots.org/api/widget/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot?ref=badge_shield)
 
 # Run it by yourself :
 
@@ -28,3 +29,7 @@
 # **REMEMBER** This is a ~~shit~~ ~~and a bad~~ bot
 
 [![EmoteCord](https://discordapp.com/api/guilds/408339131882536971/embed.png?style=banner1)](https://discord.gg/H53h5d5)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot?ref=badge_large)
