@@ -10,6 +10,7 @@
 [![](https://img.shields.io/badge/60%20percent%20of%20the%20time-works%20every%20time-brightgreen.svg)]()
 [![](https://img.shields.io/badge/dev%20for-EmoteCord-brightgreen.svg)]()
 [![EmoteCord](https://discordapp.com/api/guilds/408339131882536971/embed.png?style=shield)](https://discord.gg/H53h5d5)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot?ref=badge_shield)
 
 [![Discord Bots](https://discordbots.org/api/widget/status/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 [![Discord Bots](https://discordbots.org/api/widget/servers/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
