@@ -53,7 +53,7 @@ bot.on('message', message => {
 	let args = message.content.split(' ').slice(1);
 	var argresult = args.join(' ');
 	
-	if(message.content.startsWith(prefix + "trigerred")) {
+	if(message.content.startsWith(prefix + "triggered")) {
 		let member = message.mentions.members
 		if(member) {
 			embed.setTitle("Triggered")
