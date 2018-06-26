@@ -53,10 +53,33 @@ bot.on('message', message => {
 	let args = message.content.split(' ').slice(1);
 	var argresult = args.join(' ');
 	
-if(message.content.startsWith(prefix + "clever")) {
+	if(message.content.startsWith(prefix + "trigerred")) {
+		let member = message.mentions.members()
+		if(member) {
+			embed.setTitle("Triggered")
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+				embed.setImage("https://cute-api.tk/v1/generate/triggered?url=" + member.avatarURL)
+				embed.addField("Powered by CuteAPI")
+				embed.setTimestamp()
+				message.channel.send({embed});
+		} else {
+				embed.setTitle("Triggered")
+				embed.setAuthor(bot.user.username, bot.user.avatarURL)
+				embed.setColor(0x00AE86)
+				embed.setFooter(bot.user.username, bot.user.avatarURL);
+				embed.setImage("https://cute-api.tk/v1/generate/triggered?url=" + message.author.avatarURL)
+				embed.addField("Powered by CuteAPI")
+				embed.setTimestamp()
+				message.channel.send({embed});
+		}
+		}
+	
+if(message.content.startsWith("<@397007011549675521>")) {
 dbl.hasVoted(message.author.id).then(voted => {
     if (voted) {
-cleverbot.write(message.content - firstword, (response) => {
+cleverbot.write(message.content, (response) => {
       message.channel.startTyping();
       setTimeout(() => {
         message.channel.send(response.output).catch(console.error);
@@ -73,7 +96,7 @@ cleverbot.write(message.content - firstword, (response) => {
 		message.channel.send(`:ping_pong: \`${Date.now() - message.createdTimestamp} ms\``);
 	}
 if(message.content.startsWith(prefix + 'userinfo')) {
-		let member = message.mentions.members.first()
+		let member = message.mentions.members()
 		if(!member && !argresult.startsWith("dbl") && !argresult.startsWith("bd")) {
 			const embed = new Discord.RichEmbed()
 			embed.setTitle(message.author.username)
