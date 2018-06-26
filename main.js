@@ -54,7 +54,7 @@ bot.on('message', message => {
 	var argresult = args.join(' ');
 	
 	if(message.content.startsWith(prefix + "trigerred")) {
-		let member = message.mentions.members()
+		let member = message.mentions.members
 		if(member) {
 			embed.setTitle("Triggered")
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
@@ -96,7 +96,7 @@ cleverbot.write(message.content, (response) => {
 		message.channel.send(`:ping_pong: \`${Date.now() - message.createdTimestamp} ms\``);
 	}
 if(message.content.startsWith(prefix + 'userinfo')) {
-		let member = message.mentions.members()
+		let member = message.mentions.members
 		if(!member && !argresult.startsWith("dbl") && !argresult.startsWith("bd")) {
 			const embed = new Discord.RichEmbed()
 			embed.setTitle(message.author.username)
