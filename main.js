@@ -56,6 +56,7 @@ bot.on('message', message => {
 	if(message.content.startsWith(prefix + "triggered")) {
 		let member = message.mentions.members
 		if(member) {
+			const embed = new Discord.RichEmbed()
 			embed.setTitle("Triggered")
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
@@ -65,6 +66,7 @@ bot.on('message', message => {
 				embed.setTimestamp()
 				message.channel.send({embed});
 		} else {
+			const embed = new Discord.RichEmbed()
 				embed.setTitle("Triggered")
 				embed.setAuthor(bot.user.username, bot.user.avatarURL)
 				embed.setColor(0x00AE86)
