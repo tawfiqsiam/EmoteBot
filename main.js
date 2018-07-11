@@ -57,8 +57,8 @@ bot.on('message', message => {
 	let args = message.content.split(' ').slice(1);
 	var argresult = args.join(' ');
 	
-    if (msg.content.startsWith(prefix + "profile")) {
-        replace.get(msg.author.id, u => {
+    if (message.content.startsWith(prefix + "profile")) {
+        replace.get(message.author.id, u => {
             if (u.id != undefined) { // the result is an user (not an error)
                 const embed = new Discord.RichEmbed()
             embed.setTitle("Your profile")
