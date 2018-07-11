@@ -25,7 +25,7 @@
 
 # Run it by yourself :
 
-## look at the wiki : https://github.com/Yaume230/EmoteCord-Bot/wiki
+## look at the wiki : https://github.com/EmoteBot/EmoteBot/wiki
 
 # **REMEMBER** This is a ~~shit~~ ~~and a bad~~ bot
 
