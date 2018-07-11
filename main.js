@@ -19,7 +19,7 @@ var Cleverbot = require('cleverbot-node');
 cleverbot = new Cleverbot;
 cleverbot.configure({botapi: process.env.cleverapi});
 const Replace = require("replace.js");
-const replace = new Replace.Client(process.env.replace.js)
+const replace = new Replace.Client(process.env.replaceapi)
 
 console.error = err => {             
 	               bot.channels.get('416208941450657795').send(err)             
