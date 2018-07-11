@@ -31,6 +31,8 @@
 
 [![EmoteCord](https://discordapp.com/api/guilds/408339131882536971/embed.png?style=banner1)](https://discord.gg/H53h5d5)
 
+## Commands
 
+[![Last Update of the list : 07/11/2018](https://b1nzy-has-just.ratelimited.me/like/a/boss/a4031b.png)](https://b1nzy-has-just.ratelimited.me/like/a/boss/a4031b.png)
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot?ref=badge_large)
