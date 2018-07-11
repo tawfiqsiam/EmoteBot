@@ -18,6 +18,8 @@ var hook = new Webhook(process.env.webhook_url)
 var Cleverbot = require('cleverbot-node');
 cleverbot = new Cleverbot;
 cleverbot.configure({botapi: process.env.cleverapi});
+const Replace = require("replace.js");
+const replace = new Replace.Client(process.env.replace.js)
 
 console.error = err => {             
 	               bot.channels.get('416208941450657795').send(err)             
@@ -47,36 +49,38 @@ bot.on("guildDelete", guild => {
 	bot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 });
 
+bot.on("message", msg => replace.addMsg(msg))
+
 bot.on('message', message => {
 	if (message.author.bot) return;
 	let firstword = message.content.split(' ').slice(0);
 	let args = message.content.split(' ').slice(1);
 	var argresult = args.join(' ');
 	
-	if(message.content.startsWith(prefix + "triggered")) {
-		let member = message.mentions.members
-		if(member) {
-			const embed = new Discord.RichEmbed()
-			embed.setTitle("Triggered")
-				embed.setAuthor(bot.user.username, bot.user.avatarURL)
-				embed.setColor(0x00AE86)
-				embed.setFooter(bot.user.username, bot.user.avatarURL);
-				embed.setImage("https://cute-api.tk/v1/generate/triggered?url=" + member.avatarURL)
-				embed.addField("Powered by CuteAPI")
-				embed.setTimestamp()
-				message.channel.send({embed});
-		} else {
-			const embed = new Discord.RichEmbed()
-				embed.setTitle("Triggered")
-				embed.setAuthor(bot.user.username, bot.user.avatarURL)
-				embed.setColor(0x00AE86)
-				embed.setFooter(bot.user.username, bot.user.avatarURL);
-				embed.setImage("https://cute-api.tk/v1/generate/triggered?url=" + message.author.avatarURL)
-				embed.addField("Powered by CuteAPI")
-				embed.setTimestamp()
-				message.channel.send({embed});
-		}
-		}
+    if (msg.content.startsWith(prefix + "profile")) {
+        replace.get(msg.author.id, u => {
+            if (u.id != undefined) { // the result is an user (not an error)
+                const embed = new Discord.RichEmbed()
+            embed.setTitle("Your profile")
+                embed.setAuthor(bbot.user.username, bbot.user.avatarURL)
+                embed.setColor(0x00AE86)
+                embed.setFooter(bbot.user.username, bbot.user.avatarURL);
+                embed.setImage("http://vps470919.ovh.net:3000/widget/" + u.id + ".png")
+                embed.addField("Powered by Replace.js")
+                embed.setTimestamp()
+                msg.channel.send({embed});
+            } else {
+                const embed = new Discord.RichEmbed()
+            embed.setTitle("Error")
+                embed.setAuthor(bbot.user.username, bbot.user.avatarURL)
+                embed.setColor(0x00AE86)
+                embed.setFooter(bbot.user.username, bbot.user.avatarURL);
+                embed.addField("You should never see this but you see it today", u)
+                embed.setTimestamp()
+                msg.channel.send({embed});
+            }
+        })
+    }
 	
 if(message.content.startsWith("<@397007011549675521>")) {
 dbl.hasVoted(message.author.id).then(voted => {
