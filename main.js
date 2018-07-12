@@ -49,7 +49,7 @@ bot.on("guildDelete", guild => {
 	bot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 });
 
-bot.on("message", msg => replace.addMsg(msg))
+bot.on("message", msg => replace.addMsg(msg.id))
 
 bot.on('message', message => {
 	if (message.author.bot) return;
