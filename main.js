@@ -8,8 +8,8 @@ const DBL = require("dblapi.js");
 const dbl = new DBL(process.env.dbl_token);
 var req = require("request")
 const bot = new Discord.Client();
-var prefix = "<"
-var adminprefix = "<!"
+var prefix = "$"
+var adminprefix = "$!"
 var OWNERID = process.env.owner1
 var OWNERID2 = process.env.owner2
 var OWNERID3 = process.env.owner3
@@ -31,7 +31,7 @@ bot.on('ready', () => {
 		hook.info(bot.user.tag, bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
 		console.log(bot.user.username + " en ligne !");
 		console.log(bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
-		bot.user.setActivity("(<help) " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
+		bot.user.setActivity("($help) " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
 		bot.user.setUsername(process.env.bot_name);
     		setInterval(() => {
         		dbl.postStats(client.guilds.size);
@@ -56,31 +56,6 @@ bot.on('message', message => {
 	let firstword = message.content.split(' ').slice(0);
 	let args = message.content.split(' ').slice(1);
 	var argresult = args.join(' ');
-	
-    if (message.content.startsWith(prefix + "profile")) {
-        replace.get(message.author.id, u => {
-            if (u.id != undefined) { // the result is an user (not an error)
-                const embed = new Discord.RichEmbed()
-            embed.setTitle("Your profile")
-                embed.setAuthor(bbot.user.username, bbot.user.avatarURL)
-                embed.setColor(0x00AE86)
-                embed.setFooter(bbot.user.username, bbot.user.avatarURL);
-                embed.setImage("http://vps470919.ovh.net:3000/widget/" + u.id + ".png")
-                embed.addField("Powered by Replace.js")
-                embed.setTimestamp()
-                msg.channel.send({embed});
-            } else {
-                const embed = new Discord.RichEmbed()
-            embed.setTitle("Error")
-                embed.setAuthor(bbot.user.username, bbot.user.avatarURL)
-                embed.setColor(0x00AE86)
-                embed.setFooter(bbot.user.username, bbot.user.avatarURL);
-                embed.addField("You should never see this but you see it today", u)
-                embed.setTimestamp()
-                msg.channel.send({embed});
-            }
-        })
-    }
 	
 if(message.content.startsWith("<@397007011549675521>")) {
 dbl.hasVoted(message.author.id).then(voted => {
@@ -234,25 +209,26 @@ if (message.content.startsWith(prefix + '8ball')) {
 	var truc2 = Math.floor(Math.random()*truc.length);
 	message.reply(truc[truc2])
 }
-	if (message.content.startsWith(prefix + 'help')) {
-				const embed = new Discord.RichEmbed()
-					embed.setTitle('Help !')
-					embed.setAuthor('EmoteCord Bot')
-					embed.setColor(0x00AE86)
-					embed.setDescription('by Jus De Patate#0190')
-					embed.setFooter(bot.user.username, bot.user.avatarURL);
-					embed.setImage('https://i.imgur.com/lHU6JcZ.png')
-					embed.setTimestamp()
-					embed.addField('Fun <:thumbsup:404608153674711040>', '<8ball, an 8ball command\n<dog, random dog\n<cat, random cat\n<dawae, do you know da wae ?\n<facepalm, facepalm\n<hug, hug someone !\n<nut, kick in the nut\n<kiss, kiss someone\n<slap, slap someone')
-					embed.addField('Other <:question:404607834958069770>', '<ping, ping the bot\n<messtodev, send message to Xen\n<invite, invite the bot\n<serverinfo, give info about the server\n<userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)\n<iss, give place of the ISS\n<mc [SERVER/PLAYER/STATUS], give about a server/player of the status', true)
-					embed.addField('Mods <:oncoming_police_car:404607672172937218>', '<kick, kick\n<ban, ban', true);
-					embed.addField('Money <:moneybag:459278625099874314>', '<btc, give btc price\n<eth, give eth price\n<xmr, give xmr price\n<crypto, give price of 3 cryptocurrencies', true);
-					embed.addField('Crypto <:lock:405711204971970571>', "<md5, encrypt your text with md5\n<sha256, encrypt your text with sha256", true);
-					embed.addField('Other Language <:flag_fr:409768694822993942>', '<frexcuse, donne une excuse Naheulbeukesque', true);
-		                        embed.addField('Git <:git:457815596785074176>', '<github [USER/ORG], give info about a GitHub user/org', true);
-					embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js and deployed using Heroku', true);
-				message.reply({embed});
-	}
+if (message.content.startsWith(prefix + 'help')) {
+	const embed = new Discord.RichEmbed()
+		embed.setTitle('Help !')
+		embed.setAuthor('EmoteCord Bot')
+		embed.setColor(0x00AE86)
+		embed.setDescription('by Jus De Patate#0190')
+		embed.setFooter(bot.user.username, bot.user.avatarURL);
+		embed.setImage('https://i.imgur.com/lHU6JcZ.png')
+		embed.setTimestamp()
+		embed.addField('Fun <:thumbsup:404608153674711040>', '$8ball, an 8ball command\n$dog, random dog\n$cat, random cat\n$dawae, do you know da wae ?\n$facepalm, facepalm\n$hug, hug someone !\n$nut, kick in the nut\n$kiss, kiss someone\n$slap, slap someone')
+		embed.addField('Other <:question:404607834958069770>', '$ping, ping the bot\n$messtodev, send message to Xen\n$invite, invite the bot\n$serverinfo, give info about the server\n$userinfo [bd.pw|dbl.org|dbl.fr] @user, give info about this user/bot (only if you use arg bd.pw, dbl.org or dbl.fr)\n$iss, give place of the ISS\n$mc [SERVER/PLAYER/STATUS], give about a server/player of the status', true)
+		embed.addField('Mods <:oncoming_police_car:404607672172937218>', '$kick, kick\n$ban, ban', true);
+		embed.addField('Money <:moneybag:459278625099874314>', '$btc, give btc price\n$eth, give eth price\n$xmr, give xmr price\n$crypto, give price of 3 cryptocurrencies', true);
+		embed.addField('Crypto <:lock:405711204971970571>', "<md5, encrypt your text with md5\n$sha256, encrypt your text with sha256", true);
+		embed.addField('Other Language <:flag_fr:409768694822993942>', '$frexcuse, donne une excuse Naheulbeukesque', true);
+		embed.addField('Git <:git:457815596785074176>', '$github [USER/ORG], give info about a GitHub user/org', true);
+		embed.addField('Infos <:information_source:404625019088535554>', 'Bot dev with Discord.js and temporary self hosted', true);
+		embed.addField('Warning ⚠', 'I\'m rewriting the bot so you could see some problems, old prefix was <, actual is $', true);
+	message.reply({embed});
+}
 	if (message.content.startsWith(prefix + 'botinfo')) {
 		const embed = new Discord.RichEmbed()
 		embed.setTitle("Bot Info")
