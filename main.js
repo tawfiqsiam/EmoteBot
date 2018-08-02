@@ -27,26 +27,31 @@ console.error = err => {            
 		       }
 
 bot.on('ready', () => {
-		hook.success(bot.user.tag, bot.user.username + " online !");
-		hook.info(bot.user.tag, bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
+		hook.success(bot.user.username, bot.user.username + " online !");
+		hook.info(bot.user.username, bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
 		console.log(bot.user.username + " en ligne !");
 		console.log(bot.users.size + " users in " + bot.channels.size + " channels of " + bot.guilds.size + " guilds !");
-		bot.user.setActivity("($help) " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
-		bot.user.setUsername(process.env.bot_name);
+		bot.user.setActivity(prefix + "help BIG UPDATE COMING ! " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
+		bot.user.setUsername("Terminal.js");
     		setInterval(() => {
-        		dbl.postStats(client.guilds.size);
-    		}, 1800000);
+				dbl.postStats(bot.guilds.size);
+			}, 1800000);
+			setInterval(() => {
+				bot.user.setUsername("Terminal.js");
+    		}, 100);
 });
 
 bot.on('guildCreate', guild => {
-	hook.info(bot.user.tag, 'New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
+	hook.info(bot.user.username, 'New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
 	console.log('New guild: ' + guild.name + ' (id: ' + guild.id + '), ' + guild.memberCount + ' members! owner is ' + guild.owner);
-	bot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
+	bot.user.setActivity("$help BIG UPDATE COMING ! " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
+	bot.user.setUsername("Terminal.js");
 });
 bot.on("guildDelete", guild => {
 	console.log('I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
-	hook.info(bot.user.tag, 'I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
-	bot.user.setActivity("(<help " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
+	hook.info(bot.user.username, 'I was removed of : ' + guild.name + ' (id: ' + guild.id + ')');
+	bot.user.setActivity("$help BIG UPDATE COMING ! " + bot.users.size + " users / " + bot.guilds.size + " guilds !", { type: "WATCHING"});
+	bot.user.setUsername("Terminal.js");
 });
 
 bot.on("message", msg => replace.addMsg(msg.id))
