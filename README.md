@@ -18,6 +18,8 @@
 [![Discord Bots](https://discordbots.org/api/widget/lib/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 [![Discord Bots](https://discordbots.org/api/widget/owner/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
 
+# Rewrite here : https://github.com/EmoteBot/EmoteBot/tree/rewrite
+
 # Invite the bot : https://discordapp.com/oauth2/authorize?client_id=397007011549675521&scope=bot&permissions=-1
 
 [![Discord Bots](https://discordbots.org/api/widget/397007011549675521.svg)](https://discordbots.org/bot/397007011549675521)
