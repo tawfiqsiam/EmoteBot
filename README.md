@@ -5,8 +5,7 @@
 [![](https://img.shields.io/badge/built%20with-love-brightgreen.svg)]()
 [![](https://img.shields.io/badge/uses-badges-brightgreen.svg)]()
 [![](https://img.shields.io/badge/60%20percent%20of%20the%20time-works%20every%20time-brightgreen.svg)]()
-[![](https://img.shields.io/badge/dev%20for%20The%20Land%20of%20Memes-brightgreen.svg)]()
-[![EmoteCord](https://discordapp.com/api/guilds/408339131882536971/embed.png?style=shield)](https://discord.gg/H53h5d5)
+[![The Land of Memes](https://discordapp.com/api/guilds/408339131882536971/embed.png?style=shield)](https://discord.gg/H53h5d5)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FEmoteBot%2FEmoteBot?ref=badge_shield)
 
 Proof that my code is [![](https://img.shields.io/badge/very-bad-red.svg)]() :
