@@ -8,11 +8,10 @@ const DBL = require("dblapi.js");
 const dbl = new DBL(process.env.dbl_token);
 var req = require("request")
 const bot = new Discord.Client();
-var prefix = "<"
-var adminprefix = "<!"
+var prefix = "."
+var adminprefix = "."
 var OWNERID = process.env.owner1
 var OWNERID2 = process.env.owner2
-var OWNERID3 = process.env.owner3
 bot.login(process.env.BOT_TOKEN);
 var hook = new Webhook(process.env.webhook_url)
 var Cleverbot = require('cleverbot-node');
